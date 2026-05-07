@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nsengimana Sam Prophete - Portfolio Professionnel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d0f14;
+            --surface-color: #161a22;
+            --primary-color: #3b82f6;
+            --primary-hover: #60a5fa;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: var(--surface-color);
+            padding: 100px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.05) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        header .content {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        header h2 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-links a {
+            padding: 10px 25px;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-links a:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px var(--primary-color);
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        section {
+            margin-bottom: 100px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s forwards ease-out;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        section h2::after {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .card-content {
+            padding: 30px;
+            flex-grow: 1;
+        }
+
+        .card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .card .description {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .technos {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .badge {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--primary-color);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .valeur-ajoutee {
+            background-color: rgba(15, 23, 42, 0.7);
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            border-radius: 8px;
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: #e2e8f0;
+            line-height: 1.7;
+        }
+
+        .iframe-wrapper {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            border-top: 1px solid var(--border-color);
+            background-color: #000;
+        }
+
+        .iframe-wrapper iframe, .iframe-wrapper embed {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .btn-fullscreen {
+            display: block;
+            width: 100%;
+            padding: 18px;
+            text-align: center;
+            background-color: var(--surface-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border-top: 1px solid var(--border-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
+        .btn-fullscreen:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background: linear-gradient(145deg, var(--surface-color), #1c212b);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: scale(1.02);
+        }
+
+        .skill-category h3 {
+            margin-bottom: 25px;
+            color: var(--primary-hover);
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-muted);
+        }
+
+        .skill-category li::before {
+            content: '→';
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            background-color: var(--surface-color);
+        }
+
+        /* Animations for sections */
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.4s; }
+        section:nth-child(4) { animation-delay: 0.6s; }
+
+        @media (max-width: 900px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="content">
+            <h1>Nsengimana Sam Prophete</h1>
+            <h2>Expert IT, Administrateur Système & Développeur Full-Stack</h2>
+            <p style="color: var(--text-muted); margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; font-size: 1.1rem;">
+                Spécialisé dans le cycle complet : du design UI/UX à l'infrastructure serveur sécurisée, en passant par le développement logiciel complexe.
+            </p>
+            <div class="social-links">
+                <a href="https://github.com/Slow-Burn69" target="_blank">GitHub</a>
+                <a href="#" target="_blank">LinkedIn</a>
+                <a href="#projets">Projets</a>
+                <a href="#docs">Documents</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section Projets Web -->
+        <section id="projets">
+            <h2>Projets Logiciels & Web</h2>
+            <div class="grid">
+                
+                <!-- EPayFC -->
+                <div class="card">
+                    <div class="card-content">
+                        <h3>EPayFC (Gestion d'entreprise)</h3>
+                        <p class="description">Solution ERP complète pour la gestion des flux financiers et administratifs.</p>
+                        <div class="technos">
+                            <span class="badge">PHP</span>
+                            <span class="badge">JavaScript</span>
+                            <span class="badge">SQL</span>
+                            <span class="badge">B2B</span>
+                        </div>
+                        <div class="valeur-ajoutee">
+                            <strong>Valeur ajoutée :</strong> La maîtrise du développement back-end (PHP) couplée à une gestion rigoureuse de la base de données SQL permet d'assurer un suivi client fiable et de garantir l'intégrité des données transactionnelles.
+                        </div>
+                    </div>
+                    <div class="iframe-wrapper">
+                        <iframe src="http://infolab.epfc.eu:58326/EPayFC/" loading="lazy"></iframe>
+                    </div>
+                    <a href="http://infolab.epfc.eu:58326/EPayFC/" target="_blank" class="btn-fullscreen">Ouvrir en plein écran</a>
+                </div>
+
+                <!-- Checkers AI -->
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Checkers AI</h3>
+                        <p class="description">Intelligence artificielle appliquée à un moteur de jeu de dames avec interface MVVM.</p>
+                        <div class="technos">
+                            <span class="badge">JavaScript</span>
+                            <span class="badge">Algorithmique</span>
+                            <span class="badge">Pattern MVVM</span>
+                            <span class="badge">AI Logic</span>
+                        </div>
+                        <div class="valeur-ajoutee">
+                            <strong>Valeur ajoutée :</strong> L'implémentation de l'IA et l'utilisation du pattern MVVM démontrent la capacité à concevoir des applications robustes et intelligentes, séparant la logique métier complexe de l'interface utilisateur.
+                        </div>
+                    </div>
+                    <div class="iframe-wrapper">
+                        <iframe src="https://slow-burn69.github.io/Checkers/" loading="lazy"></iframe>
+                    </div>
+                    <a href="https://slow-burn69.github.io/Checkers/" target="_blank" class="btn-fullscreen">Jouer en plein écran</a>
+                </div>
+
+                <!-- IdeaScore -->
+                <div class="card">
+                    <div class="card-content">
+                        <h3>IdeaScore</h3>
+                        <p class="description">Application de scoring analytique pour l'évaluation de la viabilité des projets.</p>
+                        <div class="technos">
+                            <span class="badge">HTML5</span>
+                            <span class="badge">CSS3</span>
+                            <span class="badge">JavaScript</span>
+                            <span class="badge">Data Viz</span>
+                        </div>
+                        <div class="valeur-ajoutee">
+                            <strong>Valeur ajoutée :</strong> Transformation de concepts abstraits de décision en un outil visuel interactif, facilitant le travail des décideurs par une analyse quantitative immédiate.
+                        </div>
+                    </div>
+                    <div class="iframe-wrapper">
+                        <iframe src="https://slow-burn69.github.io/IdeaScore/" loading="lazy"></iframe>
+                    </div>
+                    <a href="https://slow-burn69.github.io/IdeaScore/" target="_blank" class="btn-fullscreen">Ouvrir en plein écran</a>
+                </div>
+
+                <!-- FootDesign -->
+                <div class="card">
+                    <div class="card-content">
+                        <h3>FootDesign</h3>
+                        <p class="description">Plateforme de communication visuelle et branding pour organisations sportives.</p>
+                        <div class="technos">
+                            <span class="badge">UI/UX Design</span>
+                            <span class="badge">CSS Avancé</span>
+                            <span class="badge">Image de Marque</span>
+                        </div>
+                        <div class="valeur-ajoutee">
+                            <strong>Valeur ajoutée :</strong> Maîtrise de l'identité visuelle et de l'expérience utilisateur, essentielles pour convertir l'intérêt d'un prospect en engagement client réel.
+                        </div>
+                    </div>
+                    <div class="iframe-wrapper">
+                        <iframe src="https://slow-burn69.github.io/FootDesign/" loading="lazy"></iframe>
+                    </div>
+                    <a href="https://slow-burn69.github.io/FootDesign/" target="_blank" class="btn-fullscreen">Ouvrir en plein écran</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section Expertise Technique -->
+        <section id="docs">
+            <h2>Expertise Système & Documentation</h2>
+            <div class="grid">
+                
+                <!-- Rapport Serveur Web -->
+                <div class="card" style="grid-column: 1 / -1;">
+                    <div class="card-content">
+                        <h3>Installation & Sécurisation Serveur Web (Linux)</h3>
+                        <div class="technos">
+                            <span class="badge">Ubuntu Server</span>
+                            <span class="badge">Apache2</span>
+                            <span class="badge">SSH/SFTP</span>
+                            <span class="badge">SSL (OpenSSL)</span>
+                        </div>
+                        <div class="valeur-ajoutee">
+                            <strong>Valeur ajoutée :</strong> La configuration de serveurs avec montage de partitions (fstab) et sécurisation SSL/SSH prouve que je peux gérer l'infrastructure critique d'une entreprise en garantissant la confidentialité des flux.
+                        </div>
+                    </div>
+                    <div class="iframe-wrapper" style="height: 600px;">
+                        <embed src="./Docs/ProjetEBNS.SamHugo.pdf" type="application/pdf">
+                    </div>
+                    <a href="./Docs/ProjetEBNS.SamHugo.pdf" target="_blank" class="btn-fullscreen">Lire le rapport complet (PDF)</a>
+                </div>
+
+                <!-- CV Document -->
+                <div class="card" style="grid-column: 1 / -1;">
+                    <div class="card-content">
+                        <h3>Curriculum Vitae Professionnel</h3>
+                        <div class="valeur-ajoutee">
+                            <strong>Valeur ajoutée :</strong> Mon parcours polyvalent (Vente, Logistique, Service) m'apporte une rigueur opérationnelle et un sens du client que les profils purement techniques n'ont pas. Je comprends les enjeux business derrière le code.
+                        </div>
+                    </div>
+                    <div class="iframe-wrapper" style="height: 800px;">
+                        <embed src="./Docs/Nsengimana Sam Prophete.pdf" type="application/pdf">
+                    </div>
+                    <a href="./Docs/Nsengimana Sam Prophete.pdf" target="_blank" class="btn-fullscreen">Télécharger le CV</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section Compétences -->
+        <section>
+            <h2>Compétences & Langues</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Développement</h3>
+                    <ul>
+                        <li>Java & PHP</li>
+                        <li>JavaScript (ES6+)</li>
+                        <li>HTML5 & CSS3 (Flex/Grid)</li>
+                        <li>Architecture Logicielle (MVVM)</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Infrastructure</h3>
+                    <ul>
+                        <li>Admin Linux (Ubuntu Server)</li>
+                        <li>Sécurisation (SSL, SSH, Permissions)</li>
+                        <li>Gestion SQL (MySQL, PostgreSQL)</li>
+                        <li>Cisco Networking (Packet Tracer)</li>
+                    </ul>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Langues</h3>
+                    <ul>
+                        <li><strong>Français :</strong> Langue maternelle</li>
+                        <li><strong>Anglais :</strong> Courant (Professionnel)</li>
+                        <li><strong>Néerlandais :</strong> Avancé (B2)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Nsengimana Sam Prophete | Expert IT & Développeur Full-Stack</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">Fait avec rigueur et passion à Bruxelles.</p>
+    </footer>
+
+</body>
+</html>
