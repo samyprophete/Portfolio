@@ -5,3 +5,4 @@ dist/
 .env
 app/
 gsap-public/
+push.bat
