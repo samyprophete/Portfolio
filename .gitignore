@@ -6,3 +6,22 @@ dist/
 app/
 gsap-public/
 push.bat
+
+# Fichiers de travail, jamais publies
+index.avant-modifs.html
+index.version-precedente.html
+assets/videos/
+assets/video/*-brut.mp4
+assets/video/about_me1.mp4
+assets/video/hero-bg1.mp4
+assets/img/Gemini_Generated_Image*.jpeg
+assets/img/slowbuild-collage.webp
+
+# Documents d'ecole que le site n'utilise pas
+Docs/demo_it2.mp4
+Docs/tgpr screenshots.pdf
+Docs/rapport_veille_final_elamri_prophete_zian.pdf
+Docs/Nsengimana Sam Rapport Serveur Web.docx
+Docs/Plan financier 2023.2.xlsx
+Docs/ProjetEBNS.SamHugo.pdf
+Docs/Rapport- ORMA-2023_2024.odt

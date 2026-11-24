@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sam Prophete — Expert IT & Développeur Full-Stack</title>
-    <meta name="description" content="Nsengimana Sam Prophete — Expert IT, Administrateur Système & Développeur Full-Stack basé à Bruxelles. Spécialisé du design UI/UX à l'infrastructure serveur sécurisée.">
+    <title>Sam Prophete — Développeur Full-Stack Junior</title>
+    <meta name="description" content="Nsengimana Sam Prophete — Développeur Full-Stack junior et administrateur système, étudiant en Informatique de Gestion à l'ICC (Bruxelles). Du design UI à l'infrastructure serveur.">
     <meta name="author" content="Nsengimana Sam Prophete">
     <meta name="keywords" content="Sam Prophete, développeur, full-stack, portfolio, Bruxelles, IT, administrateur système">
     <!-- Favicon -->
@@ -16,7 +16,7 @@
     <!-- Open Graph / LinkedIn / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://samyprophete.github.io/Portfolio/">
-    <meta property="og:title" content="Sam Prophete — Expert IT & Développeur Full-Stack">
+    <meta property="og:title" content="Sam Prophete — Développeur Full-Stack Junior">
     <meta property="og:description" content="Portfolio professionnel de Sam Prophete : Projets web full-stack, infrastructure serveur Linux et conception logicielle sur mesure.">
     <meta property="og:image" content="https://samyprophete.github.io/Portfolio/assets/img/og-image.jpg">
     <meta property="og:image:secure_url" content="https://samyprophete.github.io/Portfolio/assets/img/og-image.jpg">
@@ -27,7 +27,7 @@
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://samyprophete.github.io/Portfolio/">
-    <meta name="twitter:title" content="Sam Prophete — Expert IT & Développeur Full-Stack">
+    <meta name="twitter:title" content="Sam Prophete — Développeur Full-Stack Junior">
     <meta name="twitter:description" content="Portfolio professionnel de Sam Prophete : Projets web full-stack, infrastructure serveur Linux et conception logicielle sur mesure.">
     <meta name="twitter:image" content="https://samyprophete.github.io/Portfolio/assets/img/og-image.jpg">
 
@@ -2382,6 +2382,42 @@
             .hero-actions { flex-direction: column; }
             .hero-actions a { text-align: center; justify-content: center; }
         }
+            /* Media inside project windows (video / screenshots) */
+        .window-media { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top center; }
+        .window-media--contain { object-fit: contain; background: #f2f2f2; }
+        .other-projects { margin-top: 1rem; padding: 1.5rem 1.75rem; border-radius: 1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+        .other-projects-list { list-style: none; margin: 0.75rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.9rem; }
+        .other-projects-list li { display: grid; grid-template-columns: 11rem 1fr auto; gap: 1rem; align-items: baseline; }
+        .other-name { font-family: 'Sora', sans-serif; font-weight: 700; color: #fff; }
+        .other-desc { color: rgba(255,255,255,0.65); font-size: 0.92rem; }
+        .other-links { display: flex; gap: 0.75rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+        .other-links a { color: #a78bfa; text-decoration: none; }
+        .other-links a:hover { color: #fff; }
+        @media (max-width: 720px) { .other-projects-list li { grid-template-columns: 1fr; gap: 0.25rem; } }
+    
+        /* ---------- Hero: live 3D drawing ---------- */
+        .hero-right-col { display: flex; align-items: flex-end; justify-content: flex-end; min-height: 30rem; }
+
+        /* ---------- Quieter typography: no accent word, no tracked-out labels ---------- */
+        .text-gradient-warm { background: none !important; -webkit-text-fill-color: currentColor !important; color: inherit !important; }
+        .section-label { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; letter-spacing: 0; color: var(--violet-300); }
+        .project-meta { font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0; text-transform: none; }
+        .hero-mono { letter-spacing: 0.02em; text-transform: none; }
+
+        /* ---------- Project windows: straighten in 3D while scrolling in ---------- */
+        .projects-list { perspective: 1600px; }
+        .project-mockup-window { transform-style: preserve-3d; will-change: transform; }
+
+        /* ---------- Skills index ---------- */
+        @media (min-width: 961px) {
+            .skills-sticky-aside { top: 110px; }
+            .skills-nav-list { position: relative; }
+            .skills-nav-link { position: relative; z-index: 1; }
+            .skills-nav-link.active { background: transparent; border-color: transparent; box-shadow: none; transform: none; }
+            .skills-nav-marker { position: absolute; left: 0; top: 0; width: 100%; height: 0; opacity: 0; border-radius: var(--radius-lg); background: rgba(24, 14, 58, 0.92); border: 1px solid rgba(139, 92, 246, 0.65); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45), 0 0 20px rgba(139, 92, 246, 0.22); pointer-events: none; }
+        }
+        @media (max-width: 960px) { .skills-nav-marker { display: none; } }
+        @media (prefers-reduced-motion: reduce) { .project-mockup-window { transform: none !important; } }
     </style>
 </head>
 <body>
@@ -2450,11 +2486,7 @@
                 <div class="hero-particles" id="heroParticles"></div>
             </div>
 
-            <!-- Video Play/Pause Toggle Button -->
-            <button id="videoToggleBtn" aria-label="Pause background video" class="video-toggle-btn glass" title="Pause / Play background video">
-                <svg id="pauseIcon" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                <svg id="playIcon" style="display:none;" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </button>
+            
 
             <div class="hero-content">
                 <div class="hero-grid">
@@ -2464,10 +2496,10 @@
                         </p>
                         <div class="anim-hero">
                             <h1 class="hero-name text-gradient">Sam Prophete</h1>
-                            <h2 class="hero-tagline" data-fr="Je construis des solutions<br>pour un meilleur <span class='text-gradient-warm'>demain.</span>" data-en="I build solutions<br>for a better <span class='text-gradient-warm'>tomorrow.</span>" data-nl="Ik bouw oplossingen<br>voor een betere <span class='text-gradient-warm'>toekomst.</span>">Je construis des solutions<br>pour un meilleur <span class="text-gradient-warm">demain.</span></h2>
+                            <h2 class="hero-tagline" data-fr="Du code au serveur,<br>je construis des applications complètes." data-en="From code to server,<br>I build complete applications." data-nl="Van code tot server,<br>ik bouw complete applicaties.">Du code au serveur,<br>je construis des applications complètes.</h2>
                         </div>
-                        <p class="hero-desc anim-hero" data-fr="Expert IT passionné, spécialisé dans le cycle complet : du design UI/UX à l'infrastructure serveur sécurisée, en passant par le développement logiciel complexe." data-en="Passionate IT expert, specializing in the full cycle: from UI/UX design to secure server infrastructure, including complex software development." data-nl="Gedreven IT-expert, gespecialiseerd in de volledige ontwikkelingscyclus: van UI/UX design tot veilige serverinfrastructuur en geavanceerde softwareontwikkeling.">
-                            Expert IT passionné, spécialisé dans le cycle complet : du design UI/UX à l'infrastructure serveur sécurisée, en passant par le développement logiciel complexe.
+                        <p class="hero-desc anim-hero" data-fr="Développeur full-stack junior en dernière année d'Informatique de Gestion (ICC — Bruxelles). J'aime le cycle complet : du design de l'interface au serveur Linux, en passant par le code." data-en="Junior full-stack developer in the final year of a Business IT bachelor (ICC — Brussels). I enjoy the full cycle: from interface design to Linux servers, with the code in between." data-nl="Junior full-stack developer in het laatste jaar van de bachelor Toegepaste Informatica (ICC — Brussel). Ik hou van de volledige cyclus: van interfaceontwerp tot Linux-servers, en de code daartussen.">
+                            Développeur full-stack junior en dernière année d'Informatique de Gestion (ICC — Bruxelles). J'aime le cycle complet : du design de l'interface au serveur Linux, en passant par le code.
                         </p>
                         <div class="hero-actions anim-hero">
                             <a href="#projects" class="btn-primary shimmer-sweep">
@@ -2508,14 +2540,6 @@
                         </div>
                     </div>
                     <div class="hero-right-col">
-                        <div class="hero-float-card glass anim-hero" style="border-color: rgba(139,92,246,0.25);">
-                            <div class="hero-float-inner">
-                                <p class="label">// mindset</p>
-                                <p class="values">
-                                    Build <span class="dot">·</span> Learn <span class="dot">·</span> Improve <span class="dot">·</span> Repeat
-                                </p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -2541,7 +2565,7 @@
             <div class="about-content">
                 <div class="about-grid">
                     <div>
-                        <p class="section-label anim-about">// 01. <span data-fr="À PROPOS" data-en="ABOUT ME" data-nl="OVER MIJ">À PROPOS</span></p>
+                        <p class="section-label anim-about"><span data-fr="À propos" data-en="About me" data-nl="Over mij">À propos</span></p>
 
                         <!-- Intro Row: Photo à gauche (Zone Rouge) + Texte à droite (Zone Verte) -->
                         <div class="about-intro-row">
@@ -2560,8 +2584,8 @@
 
                             <div class="about-text-content">
                                 <h2 class="section-title anim-about" data-fr="Plus qu'un simple<br><span class='text-gradient-warm'>développeur.</span>" data-en="More than just<br>a <span class='text-gradient-warm'>developer.</span>" data-nl="Meer dan alleen<br><span class='text-gradient-warm'>een ontwikkelaar.</span>">Plus qu'un simple<br><span class="text-gradient-warm">développeur.</span></h2>
-                                <p class="section-desc anim-about" data-fr="Je suis Sam Prophete, expert IT spécialisé dans le cycle complet du développement. Mon parcours polyvalent (vente, logistique, service) m'apporte une rigueur opérationnelle et un sens du client que les profils purement techniques n'ont pas." data-en="I'm Sam Prophete, an IT expert specializing in the full development cycle. My versatile background (sales, logistics, service) gives me operational rigor and customer understanding that purely technical profiles lack." data-nl="Ik ben Sam Prophete, een IT-expert gespecialiseerd in de volledige ontwikkelingscyclus. Mijn veelzijdige achtergrond (verkoop, logistiek, dienstverlening) brengt operationele discipline en klantgerichtheid met zich mee die puur technische profielen vaak missen.">
-                                    Je suis Sam Prophete, expert IT spécialisé dans le cycle complet du développement. Mon parcours polyvalent (vente, logistique, service) m'apporte une rigueur opérationnelle et un sens du client que les profils purement techniques n'ont pas.
+                                <p class="section-desc anim-about" data-fr="Je suis Sam Prophete, développeur full-stack junior et étudiant en dernière année à l'ICC. Mon parcours polyvalent (vente, logistique, service) m'apporte une rigueur opérationnelle et un sens du client que les profils purement techniques n'ont pas." data-en="I'm Sam Prophete, a junior full-stack developer in my final year at ICC. My versatile background (sales, logistics, service) gives me operational rigor and customer understanding that purely technical profiles lack." data-nl="Ik ben Sam Prophete, een junior full-stack developer in mijn laatste jaar aan de ICC. Mijn veelzijdige achtergrond (verkoop, logistiek, dienstverlening) brengt operationele discipline en klantgerichtheid met zich mee die puur technische profielen vaak missen.">
+                                    Je suis Sam Prophete, développeur full-stack junior et étudiant en dernière année à l'ICC. Mon parcours polyvalent (vente, logistique, service) m'apporte une rigueur opérationnelle et un sens du client que les profils purement techniques n'ont pas.
                                 </p>
                             </div>
                         </div>
@@ -2571,7 +2595,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
                                 </span>
                                 <p class="about-card-title" data-fr="Informatique de Gestion" data-en="IT Management" data-nl="Toegepaste Informatica">Informatique de Gestion</p>
-                                <p class="about-card-sub">EPFC – Bruxelles</p>
+                                <p class="about-card-sub">ICC – Bruxelles</p>
                             </div>
                             <div class="about-card glass anim-about">
                                 <span class="about-card-icon">
@@ -2588,9 +2612,7 @@
                                 <p class="about-card-sub" data-fr="Formation" data-en="Studies" data-nl="Opleiding">Formation</p>
                             </div>
                         </div>
-                        <figure class="about-quote anim-about">
-                            <blockquote data-fr="&ldquo;Transformer la curiosité en technologie concrète.&rdquo;" data-en="&ldquo;Turning curiosity into meaningful technology.&rdquo;" data-nl="&ldquo;Nieuwsgierigheid omzetten in tastbare technologie.&rdquo;">"Transformer la curiosité en technologie concrète."</blockquote>
-                        </figure>
+                        
                     </div>
                     <div class="enjoy-panel glass-strong anim-about">
                         <div class="enjoy-header">
@@ -2630,15 +2652,15 @@
                         <div class="stat-item">
                             <span class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></span>
                             <span>
-                                <span class="stat-value">6+</span>
-                                <span class="stat-label" data-fr="Projets Majeurs" data-en="Major Projects" data-nl="Belangrijke Projecten">Projets Majeurs</span>
+                                <span class="stat-value">10</span>
+                                <span class="stat-label" data-fr="Projets présentés" data-en="Featured Projects" data-nl="Uitgelichte projecten">Projets présentés</span>
                             </span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg></span>
                             <span>
-                                <span class="stat-value">3+</span>
-                                <span class="stat-label" data-fr="Années d'expérience" data-en="Years of Experience" data-nl="Jaren ervaring">Années d'expérience</span>
+                                <span class="stat-value">3</span>
+                                <span class="stat-label" data-fr="Années de bachelier IT" data-en="Years of IT Bachelor" data-nl="Jaar IT-bachelor">Années de bachelier IT</span>
                             </span>
                         </div>
                         <div class="stat-item">
@@ -2664,7 +2686,7 @@
         <!-- ========== PARCOURS (JOURNEY - HORIZONTAL SCROLL) ========== -->
         <section class="journey-section" id="parcours">
             <div class="journey-header">
-                <p class="section-label anim-journey">// 02. <span data-fr="PARCOURS" data-en="JOURNEY" data-nl="TRAJECT">PARCOURS</span></p>
+                <p class="section-label anim-journey"><span data-fr="Parcours" data-en="Journey" data-nl="Traject">Parcours</span></p>
                 <h2 class="section-title anim-journey" data-fr="Où je suis passé : <span class='text-gradient-warm'>mon cheminement.</span>" data-en="Where I've been: <span class='text-gradient-warm'>my journey.</span>" data-nl="Mijn achtergrond: <span class='text-gradient-warm'>mijn traject.</span>">Où je suis passé : <span class="text-gradient-warm">mon cheminement.</span></h2>
                 <p class="section-desc anim-journey" data-fr="De la rigueur logistique et commerciale à l'ingénierie logicielle et l'administration système. Faites défiler horizontalement." data-en="From logistics and client rigor to software engineering and system administration. Scroll horizontally." data-nl="Van operationele en commerciële discipline naar softwareontwikkeling en systeembeheer. Scroll om mijn traject te ontdekken.">
                     De la rigueur logistique et commerciale à l'ingénierie logicielle et l'administration système. Faites défiler pour explorer mon parcours.
@@ -2677,7 +2699,7 @@
             <div class="journey-pin-wrapper">
                 <div class="journey-track" id="journeyTrack">
 
-                    <!-- Milestone 1: EPFC -->
+                    <!-- Milestone 1: ICC -->
                     <div class="journey-card">
                         <div>
                             <div class="journey-card-top">
@@ -2687,7 +2709,7 @@
                                 </div>
                             </div>
                             <h3 class="journey-card-title" data-fr="Bachelier en Informatique de Gestion" data-en="Bachelor in Business IT" data-nl="Bachelor Toegepaste Informatica">Bachelier en Informatique de Gestion</h3>
-                            <p class="journey-card-org" data-fr="EPFC — Bruxelles (En cours d'achèvement)" data-en="EPFC — Brussels (Currently completing)" data-nl="EPFC — Brussel (In afronding)">EPFC — Bruxelles (En cours d'achèvement)</p>
+                            <p class="journey-card-org" data-fr="ICC — Bruxelles (en cours)" data-en="ICC — Brussels (ongoing)" data-nl="ICC — Brussel (lopend)">ICC — Bruxelles (en cours)</p>
                             <p class="journey-card-desc" data-fr="Formation académique approfondie axée sur le développement logiciel complet, l'analyse fonctionnelle, les bases de données et les infrastructures réseaux." data-en="In-depth academic training focused on full-stack software development, functional analysis, databases and network infrastructure." data-nl="Grondige academische opleiding gericht op full-stack softwareontwikkeling, functionele analyse, databases en netwerkinfrastructuur.">
                                 Formation académique approfondie axée sur le développement logiciel complet, l'analyse fonctionnelle, les bases de données et les infrastructures réseaux.
                             </p>
@@ -2699,7 +2721,7 @@
                             </ul>
                         </div>
                         <div class="journey-chips">
-                            <span class="journey-chip">EPFC Bruxelles</span>
+                            <span class="journey-chip">ICC Bruxelles</span>
                             <span class="journey-chip" data-fr="Analyste Programmeur" data-en="Programmer Analyst" data-nl="Analist Programmeur">Analyste Programmeur</span>
                             <span class="journey-chip">Java</span>
                             <span class="journey-chip">PHP</span>
@@ -2724,7 +2746,7 @@
                             </p>
                             <ul class="journey-bullets">
                                 <li data-fr="<strong>EPayFC :</strong> Plateforme de gestion d'entreprise et simulation de transactions financières sécurisées." data-en="<strong>EPayFC:</strong> Business management platform and secure financial transaction simulation." data-nl="<strong>EPayFC:</strong> Bedrijfsbeheerplatform en simulatie van veilige financiële transacties."><strong>EPayFC :</strong> Plateforme de gestion d'entreprise et simulation de transactions financières sécurisées.</li>
-                                <li data-fr="<strong>Checkers AI :</strong> Jeu de dames interactif avec intelligence artificielle heuristique et pattern MVVM." data-en="<strong>Checkers AI:</strong> Interactive checkers game with heuristic AI and MVVM pattern." data-nl="<strong>Checkers AI:</strong> Interactief damspel met heuristische AI en MVVM-ontwerppatroon."><strong>Checkers AI :</strong> Jeu de dames interactif avec intelligence artificielle heuristique et pattern MVVM.</li>
+                                <li data-fr="<strong>ANC (JavaFX) :</strong> Application desktop de programmation visuelle avec interpréteur et exécution pas à pas." data-en="<strong>ANC (JavaFX):</strong> Visual programming desktop app with an interpreter and step-by-step execution." data-nl="<strong>ANC (JavaFX):</strong> Desktopapplicatie voor visueel programmeren met interpreter en stapsgewijze uitvoering."><strong>ANC (JavaFX) :</strong> Application desktop de programmation visuelle avec interpréteur et exécution pas à pas.</li>
                                 <li data-fr="<strong>Rapport Serveur Web :</strong> Installation, sécurisation SSL et montage persistant ext4 sous Ubuntu Server." data-en="<strong>Web Server Report:</strong> Installation, SSL security and ext4 persistent mounting on Ubuntu Server." data-nl="<strong>Webserver Rapport:</strong> Installatie, SSL-beveiliging en persistente ext4-koppeling onder Ubuntu Server."><strong>Rapport Serveur Web :</strong> Installation, sécurisation SSL et montage persistant ext4 sous Ubuntu Server.</li>
                                 <li data-fr="<strong>Projet E-Business (FIT SHOP) :</strong> Modélisation e-commerce avec business plan et gestion de stocks." data-en="<strong>E-Business Project (FIT SHOP):</strong> E-commerce modeling with business plan and inventory management." data-nl="<strong>E-Business Project (FIT SHOP):</strong> E-commerce modellering met businessplan en voorraadbeheer."><strong>Projet E-Business (FIT SHOP) :</strong> Modélisation e-commerce avec business plan et gestion de stocks.</li>
                             </ul>
@@ -2734,7 +2756,7 @@
                             <span class="journey-chip">SysAdmin</span>
                             <span class="journey-chip">Apache2 / SSL</span>
                             <span class="journey-chip" data-fr="Architecture MVVM" data-en="MVVM Architecture" data-nl="MVVM-architectuur">Architecture MVVM</span>
-                            <span class="journey-chip" data-fr="Heuristiques IA" data-en="AI Heuristics" data-nl="AI-heuristieken">Heuristiques IA</span>
+                            <span class="journey-chip">JavaFX</span>
                         </div>
                     </div>
 
@@ -2811,7 +2833,7 @@
                                 Prêt à intégrer une équipe ambitieuse en tant que Développeur Full-Stack ou Administrateur Système pour apporter rigueur et valeur immédiate.
                             </p>
                             <ul class="journey-bullets">
-                                <li data-fr="<strong>Profil Hybride rare :</strong> Rigueur terrain (logistique, service) + solidité technique (code, bases SQL, réseau)." data-en="<strong>Rare hybrid profile:</strong> Field rigor (logistics, customer service) + technical strength (code, SQL, networking)." data-nl="<strong>Uniek hybride profiel:</strong> Praktijkdiscipline (logistiek, klantenservice) + technische expertise (code, SQL, netwerken)."><strong>Profil Hybride rare :</strong> Rigueur terrain (logistique, service) + solidité technique (code, bases SQL, réseau).</li>
+                                <li data-fr="<strong>Profil hybride :</strong> Rigueur terrain (logistique, service) + solidité technique (code, bases SQL, réseau)." data-en="<strong>Hybrid profile:</strong> Field rigor (logistics, customer service) + technical strength (code, SQL, networking)." data-nl="<strong>Hybride profiel:</strong> Praktijkdiscipline (logistiek, klantenservice) + technische expertise (code, SQL, netwerken)."><strong>Profil hybride :</strong> Rigueur terrain (logistique, service) + solidité technique (code, bases SQL, réseau).</li>
                                 <li data-fr="<strong>Apprentissage continu :</strong> Curiosité permanente pour les nouvelles technologies, l'IA et le Cloud." data-en="<strong>Continuous learning:</strong> Constant curiosity for new technologies, AI, and Cloud computing." data-nl="<strong>Continu leren:</strong> Voortdurende leergierigheid voor nieuwe technologieën, AI en Cloud."><strong>Apprentissage continu :</strong> Curiosité permanente pour les nouvelles technologies, l'IA et le Cloud.</li>
                                 <li data-fr="<strong>Trilingue opérationnel :</strong> Français natif, Anglais professionnel, Néerlandais avancé." data-en="<strong>Operational trilingual:</strong> Native French, professional English, advanced Dutch." data-nl="<strong>Operationeel drietalig:</strong> Moedertaal Frans, professioneel Engels, gevorderd Nederlands."><strong>Trilingue opérationnel :</strong> Français natif, Anglais professionnel, Néerlandais avancé.</li>
                                 <li data-fr="<strong>Objectif :</strong> Concevoir des solutions logicielles pérennes, utiles et sécurisées pour les utilisateurs." data-en="<strong>Objective:</strong> Build durable, valuable, and secure software solutions for users." data-nl="<strong>Doelstelling:</strong> Duurzame, waardevolle en veilige softwareoplossingen ontwikkelen voor gebruikers."><strong>Objectif :</strong> Concevoir des solutions logicielles pérennes, utiles et sécurisées pour les utilisateurs.</li>
@@ -2840,16 +2862,15 @@
             </div>
             <div class="projects-content">
                 <div class="projects-header" style="position:relative;">
-                    <p class="section-label anim-proj">// 03. <span data-fr="PROJETS" data-en="PROJECTS" data-nl="PROJECTEN">PROJETS</span></p>
-                    <h2 class="section-title anim-proj" data-fr="Sept projets qui allient <span class='text-gradient-warm'>logique & impact.</span>" data-en="Seven projects combining <span class='text-gradient-warm'>logic & impact.</span>" data-nl="Zeven projecten die <span class='text-gradient-warm'>logica & impact</span> combineren.">Sept projets qui allient <span class="text-gradient-warm">logique & impact.</span></h2>
-                    <p class="section-desc anim-proj" data-fr="Chaque projet résout un défi technique réel : de la fintech sécurisée aux architectures intelligentes et à l'infrastructure Linux." data-en="Each project tackles a real technical challenge: from secure fintech to smart architectures and Linux infrastructure." data-nl="Elk project lost een reële technische uitdaging op: van beveiligde fintech tot slimme architecturen en Linux-infrastructuur.">
-                        Chaque projet résout un défi technique réel : de la fintech sécurisée aux architectures intelligentes et à l'infrastructure Linux.
+                    <p class="section-label anim-proj"><span data-fr="Projets" data-en="Projects" data-nl="Projecten">Projets</span></p>
+                    <h2 class="section-title anim-proj" data-fr="Dix projets, du premier site HTML à l'API Node.js." data-en="Ten projects, from my first HTML site to a Node.js API." data-nl="Tien projecten, van mijn eerste HTML-site tot een Node.js-API.">Dix projets, du premier site HTML à l'API Node.js.</h2>
+                    <p class="section-desc anim-proj" data-fr="Projets d'école, projets personnels et projet client : chaque carte indique le contexte." data-en="School projects, personal projects and a client project: each card states its context." data-nl="Schoolprojecten, persoonlijke projecten en een klantproject: elke kaart vermeldt de context.">
+                        Projets d'école, projets personnels et projet client : chaque carte indique le contexte.
                     </p>
                 </div>
 
                 <div class="projects-list">
 
-                    <!-- PROJECT 1: EPayFC (Window Left, Body Right) -->
                     <article class="project-row anim-proj-card">
                         <div class="project-mockup-window">
                             <div class="window-header">
@@ -2874,13 +2895,10 @@
                         </div>
 
                         <div class="project-content-body">
-                            <p class="project-meta" data-fr="01 · Web & Back-End · Fintech" data-en="01 · Web & Back-End · Fintech" data-nl="01 · Web & Back-End · Fintech">01 · Web & Back-End · Fintech</p>
+                            <p class="project-meta" data-fr="Web & Back-End, Fintech" data-en="Web & Back-End, Fintech" data-nl="Web & Back-End, Fintech">Web & Back-End, Fintech</p>
                             <h3 class="project-title-large">EPayFC</h3>
                             <p class="project-subtitle" data-fr="Plateforme de gestion d'entreprise & simulation de flux financiers" data-en="Business management platform & financial transaction simulation" data-nl="Bedrijfsbeheerplatform & simulatie van financiële transacties">
                                 Plateforme de gestion d'entreprise & simulation de flux financiers
-                            </p>
-                            <p class="project-hook" data-fr="&ldquo;Centraliser la trésorerie et garantir l'intégrité transactionnelle absolue des opérations PME.&rdquo;" data-en="&ldquo;Centralize cash flows and ensure absolute transactional integrity for SME operations.&rdquo;" data-nl="&ldquo;Liquiditeiten centraliseren en absolute transactionele integriteit voor KMO's garanderen.&rdquo;">
-                                &ldquo;Centraliser la trésorerie et garantir l'intégrité transactionnelle absolue des opérations PME.&rdquo;
                             </p>
                             <ul class="project-bullets-list">
                                 <li data-fr="<strong>Architecture Back-End PHP :</strong> Gestion robuste des sessions utilisateurs, routage structuré et découplage logique/affichage." data-en="<strong>PHP Back-End Architecture:</strong> Robust user session handling, structured routing and logic/view decoupling." data-nl="<strong>PHP Back-End Architectuur:</strong> Robuust gebruikerssessiebeheer, gestructureerde routing en ontkoppeling van logica en weergave."><strong>Architecture Back-End PHP :</strong> Gestion robuste des sessions utilisateurs, routage structuré et découplage logique/affichage.</li>
@@ -2907,7 +2925,102 @@
                         </div>
                     </article>
 
-                    <!-- PROJECT 2: Checkers AI (Body Left, Window Right - REVERSE) -->
+                    <article class="project-row reverse anim-proj-card">
+                        <div class="project-mockup-window">
+                            <div class="window-header">
+                                <div class="window-dots">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                </div>
+                                <div class="window-url">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                    <span>demo · application desktop JavaFX</span>
+                                </div>
+                                <div class="window-actions">
+                                    <a href="assets/video/anc-demo.mp4" target="_blank" title="Plein écran">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="window-body">
+                                <video class="window-media window-media--contain" src="assets/video/anc-demo.mp4" poster="assets/img/anc-poster.webp" muted loop playsinline autoplay preload="none" aria-label="Démo vidéo du projet ANC"></video>
+                            </div>
+                        </div>
+
+                        <div class="project-content-body">
+                            <p class="project-meta" data-fr="Application Desktop, Java" data-en="Desktop Application, Java" data-nl="Desktopapplicatie, Java">Application Desktop, Java</p>
+                            <h3 class="project-title-large">ANC — Programmation visuelle</h3>
+                            <p class="project-subtitle" data-fr="Application JavaFX : on compose un programme en blocs et une tortue le dessine à l'écran" data-en="JavaFX app: build a program from blocks and watch a turtle draw it on screen" data-nl="JavaFX-app: stel een programma samen met blokken en zie een schildpad het tekenen">Application JavaFX : on compose un programme en blocs et une tortue le dessine à l'écran
+                            </p>
+                            <ul class="project-bullets-list">
+                                <li data-fr="<strong>Éditeur de programme :</strong> palette d'actions (variables, avancer, tourner, répéter, stylo), boucles imbriquées, monter / descendre / dupliquer / supprimer." data-en="<strong>Program editor:</strong> action palette (variables, move, turn, repeat, pen), nested loops, move up / down / duplicate / delete." data-nl="<strong>Programma-editor:</strong> actiepalet (variabelen, vooruit, draaien, herhalen, pen), geneste lussen, omhoog / omlaag / dupliceren / verwijderen."><strong>Éditeur de programme :</strong> palette d'actions (variables, avancer, tourner, répéter, stylo), boucles imbriquées, monter / descendre / dupliquer / supprimer.</li>
+                                <li data-fr="<strong>Interpréteur :</strong> exécution automatique à vitesse réglable ou pas à pas, table des variables et position de la tortue mises à jour en direct." data-en="<strong>Interpreter:</strong> automatic run with adjustable speed or step by step, live variable table and turtle position." data-nl="<strong>Interpreter:</strong> automatische uitvoering met instelbare snelheid of stap voor stap, live variabelentabel en positie van de schildpad."><strong>Interpréteur :</strong> exécution automatique à vitesse réglable ou pas à pas, table des variables et position de la tortue mises à jour en direct.</li>
+                                <li data-fr="<strong>Gestion des erreurs :</strong> les erreurs d'exécution sont détectées et signalées sur l'instruction concernée." data-en="<strong>Error handling:</strong> runtime errors are detected and reported on the faulty instruction." data-nl="<strong>Foutafhandeling:</strong> runtimefouten worden gedetecteerd en bij de betrokken instructie gemeld."><strong>Gestion des erreurs :</strong> les erreurs d'exécution sont détectées et signalées sur l'instruction concernée.</li>
+                            </ul>
+                            <span class="project-badge-tag" data-fr="Projet académique, EPFC · démo vidéo (accélérée ×4)" data-en="Academic Project, EPFC · video demo (4× speed)" data-nl="Academisch project, EPFC · videodemo (4× versneld)">Projet académique, EPFC · démo vidéo (accélérée ×4)</span>
+                            <div class="project-chips-row">
+                                <span class="project-chip-item">Java</span>
+                                <span class="project-chip-item">JavaFX</span>
+                                <span class="project-chip-item">POO</span>
+                                <span class="project-chip-item">Interpréteur</span>
+                                <span class="project-chip-item">UI desktop</span>
+                            </div>
+                            <div class="project-cta-group">
+                                <a href="assets/video/anc-demo.mp4" target="_blank" class="btn-project-cta btn-project-primary">
+                                    <span data-fr="Regarder la démo" data-en="Watch the demo" data-nl="Bekijk de demo">Regarder la démo</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-row anim-proj-card">
+                        <div class="project-mockup-window">
+                            <div class="window-header">
+                                <div class="window-dots">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                </div>
+                                <div class="window-url">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                    <span>imigongo-labs · Node.js + Express</span>
+                                </div>
+                                <div class="window-actions">
+                                    <a href="assets/img/imigongo.webp" target="_blank" title="Plein écran">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="window-body">
+                                <img class="window-media" src="assets/img/imigongo.webp" alt="Page d'accueil Imigongo Labs avec compte à rebours du tirage" loading="lazy">
+                            </div>
+                        </div>
+
+                        <div class="project-content-body">
+                            <p class="project-meta" data-fr="Full-Stack Node.js, API REST" data-en="Full-Stack Node.js, REST API" data-nl="Full-Stack Node.js, REST API">Full-Stack Node.js, API REST</p>
+                            <h3 class="project-title-large">Imigongo Labs</h3>
+                            <p class="project-subtitle" data-fr="Plateforme de tirage au sort hebdomadaire avec back-office administrateur" data-en="Weekly sweepstakes platform with an admin back office" data-nl="Wekelijks winactieplatform met beheerdersomgeving">Plateforme de tirage au sort hebdomadaire avec back-office administrateur
+                            </p>
+                            <ul class="project-bullets-list">
+                                <li data-fr="<strong>API REST Express :</strong> inscription, gagnant de la semaine, connexion admin, liste des participants, tirage, historique et export CSV." data-en="<strong>Express REST API:</strong> sign-up, weekly winner, admin login, participant list, draw, history and CSV export." data-nl="<strong>Express REST API:</strong> inschrijving, winnaar van de week, admin-login, deelnemerslijst, trekking, historiek en CSV-export."><strong>API REST Express :</strong> inscription, gagnant de la semaine, connexion admin, liste des participants, tirage, historique et export CSV.</li>
+                                <li data-fr="<strong>Règles métier :</strong> validation des champs et du téléphone, un seul inscrit par numéro et par semaine, anti-bot (honeypot), un seul tirage par semaine." data-en="<strong>Business rules:</strong> field and phone validation, one entry per number per week, anti-bot honeypot, one draw per week." data-nl="<strong>Bedrijfsregels:</strong> validatie van velden en telefoon, één inschrijving per nummer per week, anti-bot honeypot, één trekking per week."><strong>Règles métier :</strong> validation des champs et du téléphone, un seul inscrit par numéro et par semaine, anti-bot (honeypot), un seul tirage par semaine.</li>
+                                <li data-fr="<strong>Back-office :</strong> accès protégé par jeton, tirage aléatoire cryptographique, compte à rebours public jusqu'à la clôture." data-en="<strong>Back office:</strong> token-protected access, cryptographically random draw, public countdown to closing time." data-nl="<strong>Back-office:</strong> toegang beveiligd met token, cryptografisch willekeurige trekking, publieke aftelklok tot de sluiting."><strong>Back-office :</strong> accès protégé par jeton, tirage aléatoire cryptographique, compte à rebours public jusqu'à la clôture.</li>
+                            </ul>
+                            <span class="project-badge-tag" data-fr="Projet personnel" data-en="Personal Project" data-nl="Persoonlijk project">Projet personnel</span>
+                            <div class="project-chips-row">
+                                <span class="project-chip-item">Node.js</span>
+                                <span class="project-chip-item">Express</span>
+                                <span class="project-chip-item">API REST</span>
+                                <span class="project-chip-item">JavaScript</span>
+                                <span class="project-chip-item">Stockage JSON</span>
+                            </div>
+                            <div class="project-cta-group">
+                            </div>
+                        </div>
+                    </article>
+
                     <article class="project-row reverse anim-proj-card">
                         <div class="project-mockup-window">
                             <div class="window-header">
@@ -2932,25 +3045,22 @@
                         </div>
 
                         <div class="project-content-body">
-                            <p class="project-meta" data-fr="02 · Algorithmique & IA · Architecture" data-en="02 · Algorithms & AI · Architecture" data-nl="02 · Algoritmen & AI · Architectuur">02 · Algorithmique & IA · Architecture</p>
+                            <p class="project-meta" data-fr="Algorithmique, Jeu" data-en="Algorithms, Game" data-nl="Algoritmen, Spel">Algorithmique, Jeu</p>
                             <h3 class="project-title-large">Checkers AI</h3>
-                            <p class="project-subtitle" data-fr="Jeu de dames interactif avec intelligence artificielle & pattern MVVM" data-en="Interactive checkers game with AI opponent & MVVM architecture" data-nl="Interactief damspel met AI-tegenstander & MVVM-architectuur">
-                                Jeu de dames interactif avec intelligence artificielle & pattern MVVM
-                            </p>
-                            <p class="project-hook" data-fr="&ldquo;Défiez une IA heuristique sur un damier fluide développé selon les principes stricts du MVVM.&rdquo;" data-en="&ldquo;Challenge a heuristic AI on a fluid board designed with strict MVVM principles.&rdquo;" data-nl="&ldquo;Daag een heuristische AI uit op een soepel dambord gebouwd volgens strikte MVVM-principes.&rdquo;">
-                                &ldquo;Défiez une IA heuristique sur un damier fluide développé selon les principes stricts du MVVM.&rdquo;
+                            <p class="project-subtitle" data-fr="Jeu de dames complet : moteur de règles internationales et adversaire IA" data-en="Full checkers game: international rules engine and AI opponent" data-nl="Volledig damspel: engine met internationale regels en AI-tegenstander">
+                                Jeu de dames complet : moteur de règles internationales et adversaire IA
                             </p>
                             <ul class="project-bullets-list">
-                                <li data-fr="<strong>Intelligence Artificielle & Heuristique :</strong> Analyse récursive des coups, détection des prises obligatoires et sélection de trajectoires optimales." data-en="<strong>AI & Heuristics:</strong> Recursive move evaluation, mandatory capture detection, and optimal path selection." data-nl="<strong>Artificiële Intelligentie & Heuristiek:</strong> Recursieve analyse van zetten, verplichte slagdetectie en selectie van optimale trajecten."><strong>Intelligence Artificielle & Heuristique :</strong> Analyse récursive des coups, détection des prises obligatoires et sélection de trajectoires optimales.</li>
-                                <li data-fr="<strong>Architecture MVVM :</strong> Modèle de jeu indépendant, ViewModel réactif liant l'état et Vue dynamique synchronisée sans rechargement." data-en="<strong>MVVM Architecture:</strong> Independent game model, reactive ViewModel binding state and dynamic view updated without reload." data-nl="<strong>MVVM-architectuur:</strong> Onafhankelijk spelmodel, reactieve ViewModel die toestand koppelt en dynamische weergave zonder herladen."><strong>Architecture MVVM :</strong> Modèle de jeu indépendant, ViewModel réactif liant l'état et Vue dynamique synchronisée sans rechargement.</li>
-                                <li data-fr="<strong>Modes flexibles :</strong> Affrontement joueur contre joueur en local ou partie intense contre l'IA à difficulté calibrée." data-en="<strong>Flexible Game Modes:</strong> Local two-player matches or intense gameplay against calibrated difficulty AI." data-nl="<strong>Flexibele spelmodi:</strong> Lokaal speler tegen speler of een uitdagende partij tegen de AI met gekalibreerde moeilijkheidsgraad."><strong>Modes flexibles :</strong> Affrontement joueur contre joueur en local ou partie intense contre l'IA à difficulté calibrée.</li>
+                                <li data-fr="<strong>Moteur de règles :</strong> déplacements, prise obligatoire, rafles enchaînées, dames volantes et promotion immédiate en cours de rafle." data-en="<strong>Rules engine:</strong> moves, mandatory captures, chained multi-jumps, flying kings and instant promotion mid-sequence." data-nl="<strong>Regelengine:</strong> zetten, verplicht slaan, meervoudige slagen, vliegende dammen en directe promotie tijdens een slag."><strong>Moteur de règles :</strong> déplacements, prise obligatoire, rafles enchaînées, dames volantes et promotion immédiate en cours de rafle.</li>
+                                <li data-fr="<strong>Calcul des chemins :</strong> à la sélection d'une pièce, l'interface calcule récursivement toutes les rafles possibles et anime chaque étape." data-en="<strong>Path computation:</strong> when a piece is selected, the UI recursively computes every possible capture sequence and animates each step." data-nl="<strong>Padberekening:</strong> bij selectie van een stuk berekent de interface recursief alle mogelijke slagreeksen en animeert elke stap."><strong>Calcul des chemins :</strong> à la sélection d'une pièce, l'interface calcule récursivement toutes les rafles possibles et anime chaque étape.</li>
+                                <li data-fr="<strong>Deux modes :</strong> joueur contre joueur en local, ou contre une IA simple qui choisit parmi les coups légaux. Moteur et interface séparés." data-en="<strong>Two modes:</strong> local player vs player, or against a simple AI picking among legal moves. Engine and UI are separated." data-nl="<strong>Twee modi:</strong> lokaal speler tegen speler, of tegen een eenvoudige AI die uit de geldige zetten kiest. Engine en UI zijn gescheiden."><strong>Deux modes :</strong> joueur contre joueur en local, ou contre une IA simple qui choisit parmi les coups légaux. Moteur et interface séparés.</li>
                             </ul>
-                            <span class="project-badge-tag" data-fr="Projet Algorithmique & IA" data-en="Algorithm & AI Project" data-nl="Algoritme- & AI-project">Projet Algorithmique & IA</span>
+                            <span class="project-badge-tag" data-fr="Projet algorithmique" data-en="Algorithm Project" data-nl="Algoritmeproject">Projet algorithmique</span>
                             <div class="project-chips-row">
                                 <span class="project-chip-item">JavaScript ES6+</span>
                                 <span class="project-chip-item">Algorithmique</span>
-                                <span class="project-chip-item">Architecture MVVM</span>
-                                <span class="project-chip-item">CSS Grid</span>
+                                <span class="project-chip-item">Moteur / UI séparés</span>
+                                <span class="project-chip-item">Récursivité</span>
                                 <span class="project-chip-item">Game Design</span>
                             </div>
                             <div class="project-cta-group">
@@ -2965,7 +3075,6 @@
                         </div>
                     </article>
 
-                    <!-- PROJECT 3: Installation & Sécurisation Serveur Web (Window Left, Body Right) -->
                     <article class="project-row anim-proj-card">
                         <div class="project-mockup-window">
                             <div class="window-header">
@@ -2979,31 +3088,28 @@
                                     <span>docs/rapport-serveur-web.pdf</span>
                                 </div>
                                 <div class="window-actions">
-                                    <a href="./Docs/ProjetEBNS.SamHugo.pdf" target="_blank" title="Ouvrir le PDF">
+                                    <a href="./Docs/rapport-serveur-web.pdf" target="_blank" title="Ouvrir le PDF">
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
                                     </a>
                                 </div>
                             </div>
                             <div class="window-body">
-                                <embed src="./Docs/ProjetEBNS.SamHugo.pdf" type="application/pdf">
+                                <embed src="./Docs/rapport-serveur-web.pdf" type="application/pdf">
                             </div>
                         </div>
 
                         <div class="project-content-body">
-                            <p class="project-meta" data-fr="03 · Infrastructure & Systèmes · SysAdmin" data-en="03 · Infrastructure & Systems · SysAdmin" data-nl="03 · Infrastructuur & Systemen · SysAdmin">03 · Infrastructure & Systèmes · SysAdmin</p>
+                            <p class="project-meta" data-fr="Infrastructure & Systèmes, SysAdmin" data-en="Infrastructure & Systems, SysAdmin" data-nl="Infrastructuur & Systemen, SysAdmin">Infrastructure & Systèmes, SysAdmin</p>
                             <h3 class="project-title-large">Sécurisation Serveur Web</h3>
                             <p class="project-subtitle" data-fr="Installation Linux Ubuntu, Apache2, SSL auto-signé, FTP & montage de partitions" data-en="Linux Ubuntu installation, Apache2, self-signed SSL, FTP & partition mounting" data-nl="Installatie van Linux Ubuntu, Apache2, zelfondertekend SSL, FTP & partitiebeheer">
                                 Installation Linux Ubuntu, Apache2, SSL auto-signé, FTP & montage de partitions
-                            </p>
-                            <p class="project-hook" data-fr="&ldquo;Déployer une infrastructure serveur résiliente avec chiffrement des flux et gestion fine des permissions Unix.&rdquo;" data-en="&ldquo;Deploy a resilient server infrastructure with traffic encryption and granular Unix permissions.&rdquo;" data-nl="&ldquo;Een veerkrachtige serverinfrastructuur uitrollen met data-encryptie en fijnmazige Unix-rechten.&rdquo;">
-                                &ldquo;Déployer une infrastructure serveur résiliente avec chiffrement des flux et gestion fine des permissions Unix.&rdquo;
                             </p>
                             <ul class="project-bullets-list">
                                 <li data-fr="<strong>Chiffrement OpenSSL & Sécurité Apache2 :</strong> Génération de certificats SSL auto-signés RSA 2048-bit, activation du module SSL et redirection HTTPS automatique." data-en="<strong>OpenSSL Encryption & Apache2 Security:</strong> 2048-bit RSA self-signed SSL certificate generation, SSL module activation, and automatic HTTPS redirection." data-nl="<strong>OpenSSL Encryptie & Apache2 Beveiliging:</strong> Genereren van 2048-bit RSA zelfondertekende SSL-certificaten, activering van SSL-module en automatische HTTPS-omleiding."><strong>Chiffrement OpenSSL & Sécurité Apache2 :</strong> Génération de certificats SSL auto-signés RSA 2048-bit, activation du module SSL et redirection HTTPS automatique.</li>
                                 <li data-fr="<strong>FTP Sécurisé (vsftpd) & Permissions :</strong> Configuration fine des droits de lecture/écriture avec groupes Unix (`www-data`, `webusr`) et élimination des vulnérabilités d'accès." data-en="<strong>Secure FTP (vsftpd) & Permissions:</strong> Fine-grained read/write permissions with Unix groups (`www-data`, `webusr`) and access vulnerability mitigation." data-nl="<strong>Veilige FTP (vsftpd) & Toegangsrechten:</strong> Nauwkeurige configuratie van lees-/schrijfrechten met Unix-groepen (`www-data`, `webusr`) en uitsluiten van toegangslekken."><strong>FTP Sécurisé (vsftpd) & Permissions :</strong> Configuration fine des droits de lecture/écriture avec groupes Unix (`www-data`, `webusr`) et élimination des vulnérabilités d'accès.</li>
                                 <li data-fr="<strong>Gestion du stockage & fstab :</strong> Création de partitions disques sous VirtualBox, formatage ext4 et montage persistant automatisé dans `/etc/fstab`." data-en="<strong>Storage Management & fstab:</strong> Disk partition creation in VirtualBox, ext4 formatting, and persistent automated mounting in `/etc/fstab`." data-nl="<strong>Opslagbeheer & fstab:</strong> Aanmaken van schijfpartities onder VirtualBox, ext4-formattering en geautomatiseerde persistente koppeling in `/etc/fstab`."><strong>Gestion du stockage & fstab :</strong> Création de partitions disques sous VirtualBox, formatage ext4 et montage persistant automatisé dans `/etc/fstab`.</li>
                             </ul>
-                            <span class="project-badge-tag" data-fr="Rapport Technique Système & Réseau" data-en="Systems & Network Technical Report" data-nl="Technisch Systeem- & Netwerkinfrastructuurrapport">Rapport Technique Système & Réseau</span>
+                            <span class="project-badge-tag" data-fr="Projet académique, EPFC · Rapport technique" data-en="Academic Project, EPFC · Technical Report" data-nl="Academisch project, EPFC · Technisch rapport">Projet académique, EPFC · Rapport technique</span>
                             <div class="project-chips-row">
                                 <span class="project-chip-item">Linux Ubuntu Server</span>
                                 <span class="project-chip-item">Apache2</span>
@@ -3013,7 +3119,7 @@
                                 <span class="project-chip-item">Partitions fstab</span>
                             </div>
                             <div class="project-cta-group">
-                                <a href="./Docs/ProjetEBNS.SamHugo.pdf" target="_blank" class="btn-project-cta btn-project-primary">
+                                <a href="./Docs/rapport-serveur-web.pdf" target="_blank" class="btn-project-cta btn-project-primary">
                                     <span data-fr="Consulter le rapport PDF" data-en="View PDF Report" data-nl="Bekijk PDF-rapport">Consulter le rapport PDF</span>
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                 </a>
@@ -3021,7 +3127,105 @@
                         </div>
                     </article>
 
-                    <!-- PROJECT 4: IdeaScore (Body Left, Window Right - REVERSE) -->
+                    <article class="project-row reverse anim-proj-card">
+                        <div class="project-mockup-window">
+                            <div class="window-header">
+                                <div class="window-dots">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                </div>
+                                <div class="window-url">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                    <span>samyprophete.github.io/FootDesign</span>
+                                </div>
+                                <div class="window-actions">
+                                    <a href="https://samyprophete.github.io/FootDesign/" target="_blank" title="Plein écran">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="window-body">
+                                <iframe src="https://samyprophete.github.io/FootDesign/" loading="lazy" title="FootDesign"></iframe>
+                            </div>
+                        </div>
+
+                        <div class="project-content-body">
+                            <p class="project-meta" data-fr="UI & design sportif" data-en="UI & sports design" data-nl="UI & sportdesign">UI & design sportif</p>
+                            <h3 class="project-title-large">FootDesign</h3>
+                            <p class="project-subtitle" data-fr="Site vitrine pour mes créations graphiques autour du football" data-en="Showcase site for my football graphic design work" data-nl="Showcasesite voor mijn grafisch werk rond voetbal">Site vitrine pour mes créations graphiques autour du football
+                            </p>
+                            <ul class="project-bullets-list">
+                                <li data-fr="<strong>Galerie par catégorie :</strong> affiches d'avant-match, compositions d'équipe, résultats, visuels de motivation et de performance." data-en="<strong>Gallery by category:</strong> match previews, line-ups, results, motivation and performance visuals." data-nl="<strong>Galerij per categorie:</strong> voorbeschouwingen, opstellingen, uitslagen, motivatie- en prestatievisuals."><strong>Galerie par catégorie :</strong> affiches d'avant-match, compositions d'équipe, résultats, visuels de motivation et de performance.</li>
+                                <li data-fr="<strong>Animations GSAP :</strong> apparitions au défilement et fonds vidéo, compressés pour un chargement rapide." data-en="<strong>GSAP animations:</strong> scroll reveals and video backgrounds, compressed for fast loading." data-nl="<strong>GSAP-animaties:</strong> scroll-effecten en video-achtergronden, gecomprimeerd om snel te laden."><strong>Animations GSAP :</strong> apparitions au défilement et fonds vidéo, compressés pour un chargement rapide.</li>
+                                <li data-fr="<strong>Sans framework :</strong> HTML, CSS et JavaScript, adapté au mobile." data-en="<strong>No framework:</strong> HTML, CSS and JavaScript, mobile friendly." data-nl="<strong>Zonder framework:</strong> HTML, CSS en JavaScript, geschikt voor mobiel."><strong>Sans framework :</strong> HTML, CSS et JavaScript, adapté au mobile.</li>
+                            </ul>
+                            <span class="project-badge-tag" data-fr="Projet personnel" data-en="Personal Project" data-nl="Persoonlijk project">Projet personnel</span>
+                            <div class="project-chips-row">
+                                <span class="project-chip-item">HTML5</span>
+                                <span class="project-chip-item">CSS3</span>
+                                <span class="project-chip-item">JavaScript</span>
+                                <span class="project-chip-item">GSAP</span>
+                                <span class="project-chip-item">Design graphique</span>
+                            </div>
+                            <div class="project-cta-group">
+                                <a href="https://samyprophete.github.io/FootDesign/" target="_blank" class="btn-project-cta btn-project-primary">
+                                    <span data-fr="Voir le site" data-en="Visit the site" data-nl="Bekijk de site">Voir le site</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
+                                <a href="https://github.com/samyprophete/FootDesign" target="_blank" class="btn-project-cta btn-project-secondary">
+                                    <span data-fr="Voir le code GitHub" data-en="View on GitHub" data-nl="Bekijk op GitHub">Voir le code GitHub</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-row anim-proj-card">
+                        <div class="project-mockup-window">
+                            <div class="window-header">
+                                <div class="window-dots">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                </div>
+                                <div class="window-url">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                    <span>dolce · concept de refonte</span>
+                                </div>
+                                <div class="window-actions">
+                                    <a href="assets/img/dolce.webp" target="_blank" title="Plein écran">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="window-body">
+                                <img class="window-media" src="assets/img/dolce.webp" alt="Page d'accueil du concept Dolce avec nappe vichy et cloche" loading="lazy">
+                            </div>
+                        </div>
+
+                        <div class="project-content-body">
+                            <p class="project-meta" data-fr="Front-End créatif, Concept" data-en="Creative Front-End, Concept" data-nl="Creatieve front-end, Concept">Front-End créatif, Concept</p>
+                            <h3 class="project-title-large">Dolce</h3>
+                            <p class="project-subtitle" data-fr="Concept de refonte pour un restaurant italien à Bruxelles" data-en="Redesign concept for an Italian restaurant in Brussels" data-nl="Redesignconcept voor een Italiaans restaurant in Brussel">Concept de refonte pour un restaurant italien à Bruxelles
+                            </p>
+                            <ul class="project-bullets-list">
+                                <li data-fr="<strong>Configurateur interactif :</strong> choix des pâtes, de la sauce et des garnitures étape par étape, avec animations et ticket récapitulatif." data-en="<strong>Interactive builder:</strong> pick pasta, sauce and toppings step by step, with animations and a summary receipt." data-nl="<strong>Interactieve configurator:</strong> kies pasta, saus en toppings stap voor stap, met animaties en een overzichtsticket."><strong>Configurateur interactif :</strong> choix des pâtes, de la sauce et des garnitures étape par étape, avec animations et ticket récapitulatif.</li>
+                                <li data-fr="<strong>Direction artistique :</strong> palette italienne, nappe vichy, typographies Anton et Instrument Serif." data-en="<strong>Art direction:</strong> Italian palette, gingham tablecloth, Anton and Instrument Serif typefaces." data-nl="<strong>Art direction:</strong> Italiaans palet, ruitjestafelkleed, lettertypes Anton en Instrument Serif."><strong>Direction artistique :</strong> palette italienne, nappe vichy, typographies Anton et Instrument Serif.</li>
+                                <li data-fr="<strong>Sans framework :</strong> environ 570 lignes de JavaScript pur pour toutes les interactions." data-en="<strong>No framework:</strong> about 570 lines of plain JavaScript for every interaction." data-nl="<strong>Zonder framework:</strong> ongeveer 570 regels pure JavaScript voor alle interacties."><strong>Sans framework :</strong> environ 570 lignes de JavaScript pur pour toutes les interactions.</li>
+                            </ul>
+                            <span class="project-badge-tag" data-fr="Concept personnel (non commandé par le restaurant)" data-en="Personal concept (not commissioned by the restaurant)" data-nl="Persoonlijk concept (niet in opdracht van het restaurant)">Concept personnel (non commandé par le restaurant)</span>
+                            <div class="project-chips-row">
+                                <span class="project-chip-item">HTML5</span>
+                                <span class="project-chip-item">CSS3</span>
+                                <span class="project-chip-item">JavaScript</span>
+                                <span class="project-chip-item">Animation</span>
+                                <span class="project-chip-item">UI design</span>
+                            </div>
+                            <div class="project-cta-group">
+                            </div>
+                        </div>
+                    </article>
+
                     <article class="project-row reverse anim-proj-card">
                         <div class="project-mockup-window">
                             <div class="window-header">
@@ -3046,13 +3250,10 @@
                         </div>
 
                         <div class="project-content-body">
-                            <p class="project-meta" data-fr="04 · Outil d'Évaluation · Business Logic" data-en="04 · Evaluation Tool · Business Logic" data-nl="04 · Evaluatietool · Bedrijfslogica">04 · Outil d'Évaluation · Business Logic</p>
+                            <p class="project-meta" data-fr="Outil d'Évaluation, Business Logic" data-en="Evaluation Tool, Business Logic" data-nl="Evaluatietool, Bedrijfslogica">Outil d'Évaluation, Business Logic</p>
                             <h3 class="project-title-large">IdeaScore</h3>
                             <p class="project-subtitle" data-fr="Outil d'évaluation matricielle et scoring d'idées de projets pour l'aide à la décision" data-en="Matrix evaluation tool and project idea scoring for decision-making" data-nl="Matrix-evaluatietool en scoringssysteem voor projectideeën ter ondersteuning van besluitvorming">
                                 Outil d'évaluation matricielle et scoring d'idées de projets pour l'aide à la décision
-                            </p>
-                            <p class="project-hook" data-fr="&ldquo;Transformer des critères d'évaluation abstraits en un score de viabilité clair et visuel.&rdquo;" data-en="&ldquo;Turn abstract evaluation criteria into a clear, visual viability score.&rdquo;" data-nl="&ldquo;Abstracte evaluatiecriteria transformeren in een duidelijke, visuele haalbaarheidsscore.&rdquo;">
-                                &ldquo;Transformer des critères d'évaluation abstraits en un score de viabilité clair et visuel.&rdquo;
                             </p>
                             <ul class="project-bullets-list">
                                 <li data-fr="<strong>Modélisation analytique :</strong> Algorithme pondéré prenant en compte faisabilité technique, potentiel marché et retour sur investissement." data-en="<strong>Analytical Modeling:</strong> Weighted algorithm considering technical feasibility, market potential, and ROI." data-nl="<strong>Analytische modellering:</strong> Gewogen algoritme rekening houdend met technische haalbaarheid, marktpotentieel en return on investment."><strong>Modélisation analytique :</strong> Algorithme pondéré prenant en compte faisabilité technique, potentiel marché et retour sur investissement.</li>
@@ -3078,121 +3279,6 @@
                         </div>
                     </article>
 
-                    <!-- PROJECT 5: FootDesign (Window Left, Body Right) -->
-                    <article class="project-row anim-proj-card">
-                        <div class="project-mockup-window">
-                            <div class="window-header">
-                                <div class="window-dots">
-                                    <span class="dot dot-red"></span>
-                                    <span class="dot dot-yellow"></span>
-                                    <span class="dot dot-green"></span>
-                                </div>
-                                <div class="window-url">
-                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-                                    <span>samyprophete.github.io/FootDesign</span>
-                                </div>
-                                <div class="window-actions">
-                                    <a href="https://samyprophete.github.io/FootDesign/" target="_blank" title="Plein écran">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="window-body">
-                                <iframe src="https://samyprophete.github.io/FootDesign/" loading="lazy" title="FootDesign preview"></iframe>
-                            </div>
-                        </div>
-
-                        <div class="project-content-body">
-                            <p class="project-meta" data-fr="05 · UI/UX & Branding · Design Sportif" data-en="05 · UI/UX & Branding · Sports Design" data-nl="05 · UI/UX & Branding · Sportdesign">05 · UI/UX & Branding · Design Sportif</p>
-                            <h3 class="project-title-large">FootDesign</h3>
-                            <p class="project-subtitle" data-fr="Plateforme de design et d'image de marque dédiée aux équipes de football" data-en="Design and branding platform dedicated to football teams" data-nl="Design- en brandingplatform speciaal ontworpen voor voetbalclubs">
-                                Plateforme de design et d'image de marque dédiée aux équipes de football
-                            </p>
-                            <p class="project-hook" data-fr="&ldquo;Allier esthétique sportive premium, ergonomie moderne et immersion visuelle complète.&rdquo;" data-en="&ldquo;Combine premium sports aesthetics, modern ergonomics and complete visual immersion.&rdquo;" data-nl="&ldquo;Premium sportesthetiek, moderne ergonomie en volledige visuele immersie verenigen.&rdquo;">
-                                &ldquo;Allier esthétique sportive premium, ergonomie moderne et immersion visuelle complète.&rdquo;
-                            </p>
-                            <ul class="project-bullets-list">
-                                <li data-fr="<strong>Direction artistique soignée :</strong> Création d'identités visuelles percutantes, palettes de couleurs contrastées et mise en valeur d'équipements." data-en="<strong>Refined Art Direction:</strong> High-impact visual identities, contrasting color palettes, and sportswear kit showcases." data-nl="<strong>Verfijnde art direction:</strong> Creëren van krachtige visuele identiteiten, contrasterende kleurenpaletten en uitlichting van sportuitrustingen."><strong>Direction artistique soignée :</strong> Création d'identités visuelles percutantes, palettes de couleurs contrastées et mise en valeur d'équipements.</li>
-                                <li data-fr="<strong>Ergonomie & Micro-interactions :</strong> Expérience utilisateur fluide pensée pour la présentation de kits et logos sportifs." data-en="<strong>Ergonomics & Micro-interactions:</strong> Seamless user experience crafted for presenting sports kits and emblems." data-nl="<strong>Ergonomie & Micro-interacties:</strong> Soepele gebruikerservaring ontworpen voor de presentatie van clubtenues en sportlogo's."><strong>Ergonomie & Micro-interactions :</strong> Expérience utilisateur fluide pensée pour la présentation de kits et logos sportifs.</li>
-                                <li data-fr="<strong>Responsive fluide :</strong> Adaptation impeccable sur mobiles, tablettes et grands écrans avec transitions CSS sur mesure." data-en="<strong>Fluid Responsiveness:</strong> Flawless adaptation on mobile, tablet, and desktop with custom CSS transitions." data-nl="<strong>Vloeiende responsiviteit:</strong> Vlekkeloze weergave op smartphones, tablets en grote schermen met op maat gemaakte CSS-overgangen."><strong>Responsive fluide :</strong> Adaptation impeccable sur mobiles, tablettes et grands écrans avec transitions CSS sur mesure.</li>
-                            </ul>
-                            <span class="project-badge-tag" data-fr="Design & Image de Marque" data-en="Design & Branding" data-nl="Design & Merkidentiteit">Design & Image de Marque</span>
-                            <div class="project-chips-row">
-                                <span class="project-chip-item">UI/UX Design</span>
-                                <span class="project-chip-item">CSS Avancé</span>
-                                <span class="project-chip-item">Branding</span>
-                                <span class="project-chip-item">Responsive Web</span>
-                            </div>
-                            <div class="project-cta-group">
-                                <a href="https://samyprophete.github.io/FootDesign/" target="_blank" class="btn-project-cta btn-project-primary">
-                                    <span data-fr="Explorer FootDesign" data-en="Explore FootDesign" data-nl="Ontdek FootDesign">Explorer FootDesign</span>
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </a>
-                                <a href="https://github.com/samyprophete/FootDesign" target="_blank" class="btn-project-cta btn-project-secondary">
-                                    <span data-fr="Voir le code GitHub" data-en="View on GitHub" data-nl="Bekijk op GitHub">Voir le code GitHub</span>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- PROJECT 6: Coeurs en Miette (Body Left, Window Right - REVERSE) -->
-                    <article class="project-row reverse anim-proj-card">
-                        <div class="project-mockup-window">
-                            <div class="window-header">
-                                <div class="window-dots">
-                                    <span class="dot dot-red"></span>
-                                    <span class="dot dot-yellow"></span>
-                                    <span class="dot dot-green"></span>
-                                </div>
-                                <div class="window-url">
-                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
-                                    <span>samyprophete.github.io/CoeursEnMiette</span>
-                                </div>
-                                <div class="window-actions">
-                                    <a href="https://samyprophete.github.io/CoeursEnMiette/" target="_blank" title="Plein écran">
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="window-body">
-                                <iframe src="https://samyprophete.github.io/CoeursEnMiette/" loading="lazy" title="Coeurs en Miette preview"></iframe>
-                            </div>
-                        </div>
-
-                        <div class="project-content-body">
-                            <p class="project-meta" data-fr="06 · Creative Coding · Expérience Narrative" data-en="06 · Creative Coding · Narrative Experience" data-nl="06 · Creative Coding · Narratieve Ervaring">06 · Creative Coding · Expérience Narrative</p>
-                            <h3 class="project-title-large">Coeurs en Miette</h3>
-                            <p class="project-subtitle" data-fr="Expérience web immersive explorant les émotions à travers le code créatif" data-en="Immersive web experience exploring emotions through creative coding" data-nl="Meeslepende webervaring die emoties verkent via creatieve code">
-                                Expérience web immersive explorant les émotions à travers le code créatif
-                            </p>
-                            <p class="project-hook" data-fr="&ldquo;Repousser les cadres conventionnels du web pour proposer une narration visuelle poignante.&rdquo;" data-en="&ldquo;Push beyond conventional web boundaries to offer poignant visual storytelling.&rdquo;" data-nl="&ldquo;Traditionele webkaders doorbreken voor een aangrijpende visuele vertelling.&rdquo;">
-                                &ldquo;Repousser les cadres conventionnels du web pour proposer une narration visuelle poignante.&rdquo;
-                            </p>
-                            <ul class="project-bullets-list">
-                                <li data-fr="<strong>Creative Coding & Animations :</strong> Utilisation avancée des animations JavaScript pour donner vie aux textes et formes." data-en="<strong>Creative Coding & Animations:</strong> Advanced JavaScript animations bringing text and shapes to life." data-nl="<strong>Creative Coding & Animaties:</strong> Geavanceerde JavaScript-animaties die teksten en vormen tot leven wekken."><strong>Creative Coding & Animations :</strong> Utilisation avancée des animations JavaScript pour donner vie aux textes et formes.</li>
-                                <li data-fr="<strong>Sensibilité visuelle & sonore :</strong> Conception d'une atmosphère intime et immersive où chaque interaction déclenche une réponse visuelle." data-en="<strong>Visual & Emotional Sensitivity:</strong> Intimate and immersive atmosphere where each interaction triggers a visual response." data-nl="<strong>Visuele & Emotionele Gevoeligheid:</strong> Intieme en meeslepende atmosfeer waarbij elke interactie een visuele respons activeert."><strong>Sensibilité visuelle & sonore :</strong> Conception d'une atmosphère intime et immersive où chaque interaction déclenche une réponse visuelle.</li>
-                                <li data-fr="<strong>Performance & Fluidité :</strong> Optimisation du rendu graphique pour préserver 60 images par seconde sur tout support." data-en="<strong>Performance & Fluidity:</strong> Graphic rendering optimization maintaining 60 FPS across all devices." data-nl="<strong>Prestaties & Vloeiendheid:</strong> Optimalisatie van grafische rendering om 60 frames per seconde op elk toestel te behouden."><strong>Performance & Fluidité :</strong> Optimisation du rendu graphique pour préserver 60 images par seconde sur tout support.</li>
-                            </ul>
-                            <span class="project-badge-tag" data-fr="Creative Coding & Art Numérique" data-en="Creative Coding & Digital Art" data-nl="Creative Coding & Digitale Kunst">Creative Coding & Art Numérique</span>
-                            <div class="project-chips-row">
-                                <span class="project-chip-item">Creative Coding</span>
-                                <span class="project-chip-item">JavaScript</span>
-                                <span class="project-chip-item">Web Design Émotionnel</span>
-                                <span class="project-chip-item">Micro-animations</span>
-                            </div>
-                            <div class="project-cta-group">
-                                <a href="https://samyprophete.github.io/CoeursEnMiette/" target="_blank" class="btn-project-cta btn-project-primary">
-                                    <span data-fr="Vivre l'expérience" data-en="Experience It" data-nl="Ervaar het project">Vivre l'expérience</span>
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                </a>
-                                <a href="https://github.com/samyprophete/CoeursEnMiette" target="_blank" class="btn-project-cta btn-project-secondary">
-                                    <span data-fr="Voir le code GitHub" data-en="View on GitHub" data-nl="Bekijk op GitHub">Voir le code GitHub</span>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- PROJECT 7: CV Online Client - Prince Nizingabo (Window Left, Body Right) -->
                     <article class="project-row anim-proj-card">
                         <div class="project-mockup-window">
                             <div class="window-header">
@@ -3217,13 +3303,10 @@
                         </div>
 
                         <div class="project-content-body">
-                            <p class="project-meta" data-fr="07 · Projet Client Réel · Front-End" data-en="07 · Real Client Project · Front-End" data-nl="07 · Reëel Klantenproject · Front-End">07 · Projet Client Réel · Front-End</p>
+                            <p class="project-meta" data-fr="Projet Client Réel, Front-End" data-en="Real Client Project, Front-End" data-nl="Reëel Klantenproject, Front-End">Projet Client Réel, Front-End</p>
                             <h3 class="project-title-large">CV Online Client</h3>
                             <p class="project-subtitle" data-fr="Vitrine professionnelle interactive développée sur mesure pour un client externe (Prince Nizingabo)" data-en="Custom interactive professional showcase built for an external client (Prince Nizingabo)" data-nl="Interactieve professionele showcase op maat gebouwd voor een externe klant (Prince Nizingabo)">
                                 Vitrine professionnelle interactive développée sur mesure pour un client externe (Prince Nizingabo)
-                            </p>
-                            <p class="project-hook" data-fr="&ldquo;Capter le besoin client, valoriser ses compétences et livrer un produit web impeccable.&rdquo;" data-en="&ldquo;Capture client requirements, highlight their skills and deliver a flawless web product.&rdquo;" data-nl="&ldquo;Klantbehoeften vertalen, vaardigheden uitlichten en een onberispelijk webproduct leveren.&rdquo;">
-                                &ldquo;Capter le besoin client, valoriser ses compétences et livrer un produit web impeccable.&rdquo;
                             </p>
                             <ul class="project-bullets-list">
                                 <li data-fr="<strong>Recueil des besoins & Spécifications :</strong> Échange approfondi avec le client pour concevoir une arborescence valorisante." data-en="<strong>Requirements Gathering & Specs:</strong> In-depth client exchange to architect an impactful showcase." data-nl="<strong>Behoeftenanalyse & Specificaties:</strong> Diepgaand overleg met de klant om een overtuigende websitestructuur te ontwikkelen."><strong>Recueil des besoins & Spécifications :</strong> Échange approfondi avec le client pour concevoir une arborescence valorisante.</li>
@@ -3243,6 +3326,56 @@
                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                                 </a>
                                 <a href="https://github.com/samyprophete/PrinceNizingabo" target="_blank" class="btn-project-cta btn-project-secondary">
+                                    <span data-fr="Voir le code GitHub" data-en="View on GitHub" data-nl="Bekijk op GitHub">Voir le code GitHub</span>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-row reverse anim-proj-card">
+                        <div class="project-mockup-window">
+                            <div class="window-header">
+                                <div class="window-dots">
+                                    <span class="dot dot-red"></span>
+                                    <span class="dot dot-yellow"></span>
+                                    <span class="dot dot-green"></span>
+                                </div>
+                                <div class="window-url">
+                                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/></svg>
+                                    <span>samyprophete.github.io/CoeursEnMiette</span>
+                                </div>
+                                <div class="window-actions">
+                                    <a href="https://samyprophete.github.io/CoeursEnMiette/" target="_blank" title="Plein écran">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="window-body">
+                                <iframe src="https://samyprophete.github.io/CoeursEnMiette/" loading="lazy" title="Coeurs en Miette"></iframe>
+                            </div>
+                        </div>
+
+                        <div class="project-content-body">
+                            <p class="project-meta" data-fr="Premier site web, HTML & CSS" data-en="First website, HTML & CSS" data-nl="Eerste website, HTML & CSS">Premier site web, HTML & CSS</p>
+                            <h3 class="project-title-large">Coeurs en Miette</h3>
+                            <p class="project-subtitle" data-fr="Site d'information sur les maladies cardiovasculaires" data-en="Information website about cardiovascular diseases" data-nl="Informatieve website over hart- en vaatziekten">Site d'information sur les maladies cardiovasculaires
+                            </p>
+                            <ul class="project-bullets-list">
+                                <li data-fr="<strong>Site multi-pages :</strong> tableaux, formulaire, vidéos intégrées, iframes et navigation entre les pages." data-en="<strong>Multi-page site:</strong> tables, a form, embedded videos, iframes and page navigation." data-nl="<strong>Meerdere pagina's:</strong> tabellen, een formulier, ingesloten video's, iframes en navigatie."><strong>Site multi-pages :</strong> tableaux, formulaire, vidéos intégrées, iframes et navigation entre les pages.</li>
+                                <li data-fr="<strong>Mise en page CSS :</strong> positionnement, styles et structure faits à la main, sans bibliothèque." data-en="<strong>CSS layout:</strong> positioning, styles and structure written by hand, without a library." data-nl="<strong>CSS-layout:</strong> positionering, stijlen en structuur met de hand geschreven, zonder bibliotheek."><strong>Mise en page CSS :</strong> positionnement, styles et structure faits à la main, sans bibliothèque.</li>
+                                <li data-fr="<strong>Mon point de départ :</strong> le premier site que j'ai construit, à comparer avec les projets plus récents." data-en="<strong>My starting point:</strong> the first website I built, to compare with the more recent projects." data-nl="<strong>Mijn startpunt:</strong> de eerste website die ik bouwde, om te vergelijken met recentere projecten."><strong>Mon point de départ :</strong> le premier site que j'ai construit, à comparer avec les projets plus récents.</li>
+                            </ul>
+                            <span class="project-badge-tag" data-fr="Projet académique, EPFC" data-en="Academic Project, EPFC" data-nl="Academisch project, EPFC">Projet académique, EPFC</span>
+                            <div class="project-chips-row">
+                                <span class="project-chip-item">HTML5</span>
+                                <span class="project-chip-item">CSS3</span>
+                            </div>
+                            <div class="project-cta-group">
+                                <a href="https://samyprophete.github.io/CoeursEnMiette/" target="_blank" class="btn-project-cta btn-project-primary">
+                                    <span data-fr="Voir le site" data-en="Visit the site" data-nl="Bekijk de site">Voir le site</span>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                </a>
+                                <a href="https://github.com/samyprophete/CoeursEnMiette" target="_blank" class="btn-project-cta btn-project-secondary">
                                     <span data-fr="Voir le code GitHub" data-en="View on GitHub" data-nl="Bekijk op GitHub">Voir le code GitHub</span>
                                 </a>
                             </div>
@@ -3269,7 +3402,7 @@
 
                 <!-- Section Header (Aligné avec Projets & Parcours) -->
                 <div class="skills-header" style="position: relative; margin-bottom: 2.5rem;">
-                    <p class="section-label">// 04. <span data-fr="COMPÉTENCES" data-en="SKILLS" data-nl="VAARDIGHEDEN">COMPÉTENCES</span></p>
+                    <p class="section-label"><span data-fr="Compétences" data-en="Skills" data-nl="Vaardigheden">Compétences</span></p>
                     <h2 class="section-title" data-fr="Ce avec quoi <span class='text-gradient-warm'>je construis.</span>" data-en="Tools I <span class='text-gradient-warm'>build with.</span>" data-nl="Waarmee ik <span class='text-gradient-warm'>ontwikkel.</span>">Ce avec quoi <span class="text-gradient-warm">je construis.</span></h2>
                     <p class="section-desc" data-fr="Technologies, frameworks, systèmes et outils maîtrisés au fil de mes projets et expériences." data-en="Technologies, frameworks, systems, and tools mastered across my projects and experiences." data-nl="Technologieën, frameworks, systemen en tools beheerst doorheen mijn projecten en praktijkervaring.">
                         Technologies, frameworks, systèmes et outils maîtrisés au fil de mes projets et expériences.
@@ -3289,6 +3422,7 @@
                         </div>
 
                         <nav class="skills-nav-list" aria-label="Catégories d'outils">
+                            <span class="skills-nav-marker" aria-hidden="true"></span>
                             <a href="#cat-langages" class="skills-nav-link active">
                                 <span class="skills-nav-dot"></span>
                                 <div class="skills-nav-icon-box">
@@ -3296,7 +3430,7 @@
                                 </div>
                                 <div class="skills-nav-text">
                                     <span class="skills-nav-name" data-fr="Langages" data-en="Languages" data-nl="Talen">Langages</span>
-                                    <span class="skills-nav-sub" data-fr="8 technologies" data-en="8 technologies" data-nl="8 technologieën">8 technologies</span>
+                                    <span class="skills-nav-sub" data-fr="9 technologies" data-en="9 technologies" data-nl="9 technologieën">9 technologies</span>
                                 </div>
                             </a>
 
@@ -3307,7 +3441,7 @@
                                 </div>
                                 <div class="skills-nav-text">
                                     <span class="skills-nav-name" data-fr="Frameworks" data-en="Frameworks" data-nl="Frameworks">Frameworks</span>
-                                    <span class="skills-nav-sub" data-fr="6 outils & libs" data-en="6 tools & libs" data-nl="6 tools & libs">6 outils & libs</span>
+                                    <span class="skills-nav-sub" data-fr="9 outils & libs" data-en="9 tools & libs" data-nl="9 tools & libs">9 outils & libs</span>
                                 </div>
                             </a>
 
@@ -3362,7 +3496,7 @@
                                     </div>
                                     <h3 class="skill-panel-heading" data-fr="Langages de programmation" data-en="Programming Languages" data-nl="Programmeertalen">Langages de programmation</h3>
                                 </div>
-                                <span class="skill-panel-badge" data-fr="8 Technologies" data-en="8 Technologies" data-nl="8 Technologieën">8 Technologies</span>
+                                <span class="skill-panel-badge" data-fr="9 Technologies" data-en="9 Technologies" data-nl="9 Technologieën">9 Technologies</span>
                             </div>
 
                             <div class="tool-chips-grid">
@@ -3394,7 +3528,7 @@
                                     <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><path d="M11.9 2c-3.4 0-5.4 1.5-5.4 3.5v2.6h5.5v.8H3.8c-2 0-3.8 1.2-3.8 3.5 0 2.2 1.5 3.5 3.5 3.5h2v-2.6c0-2.2 1.8-4 4-4h5.4V6.7c0-2.6-2.5-4.7-6-4.7zm-2.2 1.8c.6 0 1 .4 1 1s-.4 1-1 1-1-.4-1-1 .4-1 1-1z" fill="#3776ab"/><path d="M12.1 22c3.4 0 5.4-1.5 5.4-3.5v-2.6H12v-.8h8.2c2 0 3.8-1.2 3.8-3.5 0-2.2-1.5-3.5-3.5-3.5h-2v2.6c0 2.2-1.8 4-4 4H9.1v2.6c0 2.6 2.5 4.7 6 4.7zm2.2-1.8c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1z" fill="#ffd438"/></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">Python</span>
-                                        <span class="tool-chip-sub">Scripting & Django</span>
+                                        <span class="tool-chip-sub">Scripting</span>
                                     </div>
                                 </div>
 
@@ -3423,10 +3557,17 @@
                                 </div>
 
                                 <div class="tool-card-chip">
-                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20" fill="#9b4993"><circle cx="12" cy="12" r="10"/><text x="6" y="16" fill="#fff" font-size="12" font-family="sans-serif" font-weight="bold">C#</text></svg></span>
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#3178c6"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="10" font-family="sans-serif" font-weight="bold">TS</text></svg></span>
                                     <div class="tool-chip-info">
-                                        <span class="tool-chip-name">C#</span>
-                                        <span class="tool-chip-sub">Bases .NET</span>
+                                        <span class="tool-chip-name">TypeScript</span>
+                                        <span class="tool-chip-sub">Typage statique</span>
+                                    </div>
+                                </div>
+                                <div class="tool-card-chip">
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#2b5797"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="10" font-family="sans-serif" font-weight="bold">P</text></svg></span>
+                                    <div class="tool-chip-info">
+                                        <span class="tool-chip-name">Pascal</span>
+                                        <span class="tool-chip-sub" data-fr="Object Pascal" data-en="Object Pascal" data-nl="Object Pascal">Object Pascal</span>
                                     </div>
                                 </div>
                             </div>
@@ -3441,23 +3582,47 @@
                                     </div>
                                     <h3 class="skill-panel-heading" data-fr="Frameworks & Bibliothèques" data-en="Frameworks & Libraries" data-nl="Frameworks & Bibliotheken">Frameworks & Bibliothèques</h3>
                                 </div>
-                                <span class="skill-panel-badge" data-fr="6 Outils Clés" data-en="6 Key Tools" data-nl="6 Belangrijke Tools">6 Outils Clés</span>
+                                <span class="skill-panel-badge" data-fr="9 Outils Clés" data-en="9 Key Tools" data-nl="9 Belangrijke Tools">9 Outils Clés</span>
                             </div>
 
                             <div class="tool-chips-grid">
-                                <div class="tool-card-chip">
-                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20" fill="#092e20"><rect width="24" height="24" rx="4" fill="#092e20"/><path d="M12.8 5.7h2.4v8.8c-.4.2-1.3.4-2.1.4-2.7 0-4.1-1.3-4.1-3.6 0-2.2 1.5-3.8 3.8-3.8.8 0 1.5.2 2 .5V5.7zm0 4.1c-.3-.2-.7-.3-1.1-.3-1.2 0-2 .8-2 2.1 0 1.2.7 2 1.9 2 .5 0 .9-.1 1.2-.2V9.8z" fill="#fff"/></svg></span>
-                                    <div class="tool-chip-info">
-                                        <span class="tool-chip-name">Django</span>
-                                        <span class="tool-chip-sub">Python Web MVT</span>
-                                    </div>
-                                </div>
 
                                 <div class="tool-card-chip">
                                     <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20" fill="#e76f00"><path d="M8.85 16.84c0 .03-.03.06-.05.08-1.57.94-3.23 1.54-4.8 1.54-.73 0-1.28-.13-1.63-.4-.36-.26-.55-.66-.55-1.18 0-.82.52-1.74 1.5-2.61.99-.87 2.39-1.73 4.05-2.48l1.48 5.05zm4.84-2.88c0 .03-.02.06-.05.08-1.62.97-3.32 1.59-4.94 1.59-.75 0-1.32-.14-1.67-.42-.37-.28-.57-.7-.57-1.24 0-.85.54-1.8 1.55-2.7 1.02-.9 2.45-1.78 4.16-2.55l1.52 5.24zm4.49-3.08c0 .03-.02.06-.04.08-1.68 1.01-3.45 1.65-5.13 1.65-.78 0-1.37-.15-1.74-.44-.38-.29-.59-.73-.59-1.3 0-.89.56-1.87 1.62-2.81 1.06-.94 2.55-1.85 4.33-2.65l1.55 5.47zM22.5 12c0 5.8-4.7 10.5-10.5 10.5S1.5 17.8 1.5 12 6.2 1.5 12 1.5 22.5 6.2 22.5 12z"/></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">JavaFX</span>
                                         <span class="tool-chip-sub">Desktop MVVM</span>
+                                    </div>
+                                </div>
+
+                                <div class="tool-card-chip">
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#000"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="12" font-family="sans-serif" font-weight="bold">N</text></svg></span>
+                                    <div class="tool-chip-info">
+                                        <span class="tool-chip-name">Next.js / React</span>
+                                        <span class="tool-chip-sub">App Router · RSC</span>
+                                    </div>
+                                </div>
+
+                                <div class="tool-card-chip">
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#3c873a"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="10" font-family="sans-serif" font-weight="bold">JS</text></svg></span>
+                                    <div class="tool-chip-info">
+                                        <span class="tool-chip-name">Node.js / Express</span>
+                                        <span class="tool-chip-sub">API REST</span>
+                                    </div>
+                                </div>
+                                <div class="tool-card-chip">
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#0c4b33"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="9" font-family="sans-serif" font-weight="bold">Dj</text></svg></span>
+                                    <div class="tool-chip-info">
+                                        <span class="tool-chip-name">Django</span>
+                                        <span class="tool-chip-sub" data-fr="Framework web Python" data-en="Python web framework" data-nl="Python-webframework">Framework web Python</span>
+                                    </div>
+                                </div>
+
+                                <div class="tool-card-chip">
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#0ae448"/><text x="12" y="16" text-anchor="middle" fill="#0e100f" font-size="9" font-family="sans-serif" font-weight="bold">GS</text></svg></span>
+                                    <div class="tool-chip-info">
+                                        <span class="tool-chip-name">GSAP</span>
+                                        <span class="tool-chip-sub">Animations web</span>
                                     </div>
                                 </div>
 
@@ -3470,7 +3635,7 @@
                                 </div>
 
                                 <div class="tool-card-chip">
-                                    <span class="tool-chip-svg" style="font-size:17px; color:#38bdf8;">⚡</span>
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#2a1f52"/><text x="12" y="16" text-anchor="middle" fill="#c4b5fd" font-size="9" font-family="sans-serif" font-weight="bold">TC</text></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">Tailwind CSS</span>
                                         <span class="tool-chip-sub">Utility First</span>
@@ -3478,7 +3643,7 @@
                                 </div>
 
                                 <div class="tool-card-chip">
-                                    <span class="tool-chip-svg" style="font-size:16px; color:#0769ad; font-weight:bold;">JS</span>
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#2a1f52"/><text x="12" y="16" text-anchor="middle" fill="#c4b5fd" font-size="9" font-family="sans-serif" font-weight="bold">J</text></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">jQuery</span>
                                         <span class="tool-chip-sub">DOM & AJAX</span>
@@ -3486,7 +3651,7 @@
                                 </div>
 
                                 <div class="tool-card-chip">
-                                    <span class="tool-chip-svg" style="font-size:17px; color:#ff6384;">📊</span>
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#2a1f52"/><text x="12" y="16" text-anchor="middle" fill="#c4b5fd" font-size="9" font-family="sans-serif" font-weight="bold">C</text></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">Chart.js</span>
                                         <span class="tool-chip-sub">Visualisation KPI</span>
@@ -3525,7 +3690,7 @@
                                 </div>
 
                                 <div class="tool-card-chip">
-                                    <span class="tool-chip-svg" style="font-size:17px; color:#a855f7;">🔒</span>
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#2a1f52"/><text x="12" y="16" text-anchor="middle" fill="#c4b5fd" font-size="9" font-family="sans-serif" font-weight="bold">O</text></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">OpenSSL</span>
                                         <span class="tool-chip-sub" data-fr="Chiffrement SSL" data-en="SSL Encryption" data-nl="SSL-encryptie">Chiffrement SSL</span>
@@ -3533,7 +3698,7 @@
                                 </div>
 
                                 <div class="tool-card-chip">
-                                    <span class="tool-chip-svg" style="font-size:17px; color:#3b82f6;">📁</span>
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#2a1f52"/><text x="12" y="16" text-anchor="middle" fill="#c4b5fd" font-size="9" font-family="sans-serif" font-weight="bold">VF</text></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">vsftpd (FTP)</span>
                                         <span class="tool-chip-sub" data-fr="Transfert Chrooté" data-en="Chrooted Transfer" data-nl="Beveiligde overdracht">Transfert Chrooté</span>
@@ -3541,7 +3706,7 @@
                                 </div>
 
                                 <div class="tool-card-chip">
-                                    <span class="tool-chip-svg" style="font-size:17px; color:#10b981;">🔑</span>
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#2a1f52"/><text x="12" y="16" text-anchor="middle" fill="#c4b5fd" font-size="9" font-family="sans-serif" font-weight="bold">S</text></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">SSH</span>
                                         <span class="tool-chip-sub" data-fr="Accès distant" data-en="Remote Access" data-nl="Toegang op afstand">Accès distant</span>
@@ -3557,7 +3722,7 @@
                                 </div>
 
                                 <div class="tool-card-chip">
-                                    <span class="tool-chip-svg" style="font-size:17px; color:#ec4899;">💾</span>
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#2a1f52"/><text x="12" y="16" text-anchor="middle" fill="#c4b5fd" font-size="9" font-family="sans-serif" font-weight="bold">PE</text></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">Partitions ext4</span>
                                         <span class="tool-chip-sub" data-fr="Montage fstab" data-en="fstab Mounting" data-nl="fstab-koppeling">Montage fstab</span>
@@ -3588,7 +3753,7 @@
                                 </div>
 
                                 <div class="tool-card-chip">
-                                    <span class="tool-chip-svg" style="font-size:17px; color:#336791;">🐘</span>
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#2a1f52"/><text x="12" y="16" text-anchor="middle" fill="#c4b5fd" font-size="9" font-family="sans-serif" font-weight="bold">P</text></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">PostgreSQL</span>
                                         <span class="tool-chip-sub" data-fr="SGBD Relationnel" data-en="Relational DBMS" data-nl="Relationeel DBMS">SGBD Relationnel</span>
@@ -3596,7 +3761,7 @@
                                 </div>
 
                                 <div class="tool-card-chip">
-                                    <span class="tool-chip-svg" style="font-size:17px; color:#f29111;">🐬</span>
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#2a1f52"/><text x="12" y="16" text-anchor="middle" fill="#c4b5fd" font-size="9" font-family="sans-serif" font-weight="bold">P</text></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">phpMyAdmin</span>
                                         <span class="tool-chip-sub">Admin Web</span>
@@ -3607,28 +3772,27 @@
                                     <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20" fill="#f05032"><path d="M21.6 10.9L13.1 2.4c-.6-.6-1.5-.6-2.1 0L8.9 4.5l2.7 2.7c.6-.2 1.4 0 1.9.5.5.5.7 1.3.5 1.9l2.6 2.6c.6-.2 1.4 0 1.9.5.8.8.8 2 0 2.8s-2 .8-2.8 0c-.6-.6-.7-1.4-.4-2.1l-2.4-2.4v5.3c.2.2.3.5.3.8 0 .8-.7 1.5-1.5 1.5s-1.5-.7-1.5-1.5c0-.4.2-.8.5-1.1V9.9c-.3-.3-.5-.7-.5-1.1 0-.4.2-.8.5-1.1L8.3 5.1 2.4 11c-.6.6-.6 1.5 0 2.1l8.5 8.5c.6.6 1.5.6 2.1 0l8.6-8.6c.6-.6.6-1.5 0-2.1z"/></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">Git & GitHub</span>
-                                        <span class="tool-chip-sub">Versioning CI/CD</span>
+                                        <span class="tool-chip-sub">Versioning</span>
                                     </div>
                                 </div>
 
                                 <div class="tool-card-chip">
-                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20" fill="#2496ed"><path d="M22.5 10.8c-.3-.2-1.5-.3-2.3.3-.2-.5-.6-1-1.2-1.3l-.6-.3-.3.5c-.3.6-.4 1.4-.2 2.1-.6.4-1.8.4-2.5.1-.2 0-.3-.1-.4-.1-.5 2.5-2.6 4.3-5.3 4.3-1.6 0-3.1-.7-4.1-1.8l-.5-.5-.4.5c-.8 1-2.1 1.6-3.4 1.6H1c.6 2.5 2.9 4.4 5.6 4.4 3.4 0 6.3-2 7.4-5 1.1.2 2.3.1 3.3-.4 2.1-1 3.5-3 3.9-5.1.5.2 1 .3 1.3.3zM4 9h2v2H4zm3 0h2v2H7zm3 0h2v2h-2zm3 0h2v2h-2zm-6-3h2v2H7zm3 0h2v2h-2zm3 0h2v2h-2zm0-3h2v2h-2z"/></svg></span>
-                                    <div class="tool-chip-info">
-                                        <span class="tool-chip-name">Docker</span>
-                                        <span class="tool-chip-sub" data-fr="Conteneurs" data-en="Containers" data-nl="Containers">Conteneurs</span>
-                                    </div>
-                                </div>
-
-                                <div class="tool-card-chip">
-                                    <span class="tool-chip-svg" style="font-size:17px; color:#007acc;">💻</span>
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#2a1f52"/><text x="12" y="16" text-anchor="middle" fill="#c4b5fd" font-size="9" font-family="sans-serif" font-weight="bold">VC</text></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">VS Code</span>
                                         <span class="tool-chip-sub">IDE & Debug</span>
                                     </div>
                                 </div>
+                                <div class="tool-card-chip">
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#a8541a"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="9" font-family="sans-serif" font-weight="bold">Lz</text></svg></span>
+                                    <div class="tool-chip-info">
+                                        <span class="tool-chip-name">Lazarus</span>
+                                        <span class="tool-chip-sub" data-fr="IDE Pascal / RAD" data-en="Pascal IDE / RAD" data-nl="Pascal-IDE / RAD">IDE Pascal / RAD</span>
+                                    </div>
+                                </div>
 
                                 <div class="tool-card-chip">
-                                    <span class="tool-chip-svg" style="font-size:17px; color:#eab308;">🎯</span>
+                                    <span class="tool-chip-svg"><svg viewBox="0 0 24 24" width="20" height="20"><rect width="24" height="24" rx="4" fill="#2a1f52"/><text x="12" y="16" text-anchor="middle" fill="#c4b5fd" font-size="9" font-family="sans-serif" font-weight="bold">AS</text></svg></span>
                                     <div class="tool-chip-info">
                                         <span class="tool-chip-name">Agile / Scrum</span>
                                         <span class="tool-chip-sub" data-fr="Sprints & Stand-up" data-en="Sprints & Stand-ups" data-nl="Sprints & Stand-ups">Sprints & Stand-up</span>
@@ -3691,11 +3855,11 @@
 
                             <p class="soft-skills-label" data-fr="// Savoir-être & compétences terrain" data-en="// Soft skills & practical competencies" data-nl="// Sociale & praktische vaardigheden">// Savoir-être & compétences terrain</p>
                             <div class="soft-skills-grid">
-                                <span class="soft-skill-chip" data-fr="🎯 Rigueur Opérationnelle (Katoen Natie)" data-en="🎯 Operational Rigor (Katoen Natie)" data-nl="🎯 Operationele Discipline (Katoen Natie)">🎯 Rigueur Opérationnelle (Katoen Natie)</span>
-                                <span class="soft-skill-chip" data-fr="🤝 Relation & Sens Client" data-en="🤝 Client Relations & Customer Focus" data-nl="🤝 Klantgerichtheid & Relatiebeheer">🤝 Relation & Sens Client</span>
-                                <span class="soft-skill-chip" data-fr="⚡ Résistance au Stress" data-en="⚡ Stress Resistance" data-nl="⚡ Stressbestendigheid">⚡ Résistance au Stress</span>
-                                <span class="soft-skill-chip" data-fr="👥 Travail d'Équipe" data-en="👥 Teamwork" data-nl="👥 Teamwork & Samenwerking">👥 Travail d'Équipe</span>
-                                <span class="soft-skill-chip" data-fr="💡 Curiosité Technique" data-en="💡 Technical Curiosity" data-nl="💡 Technische Nieuwsgierigheid">💡 Curiosité Technique</span>
+                                <span class="soft-skill-chip" data-fr="🎯 Rigueur Opérationnelle (Katoen Natie)" data-en="🎯 Operational Rigor (Katoen Natie)" data-nl="🎯 Operationele Discipline (Katoen Natie)">Rigueur Opérationnelle (Katoen Natie)</span>
+                                <span class="soft-skill-chip" data-fr="🤝 Relation & Sens Client" data-en="🤝 Client Relations & Customer Focus" data-nl="🤝 Klantgerichtheid & Relatiebeheer">Relation & Sens Client</span>
+                                <span class="soft-skill-chip" data-fr="⚡ Résistance au Stress" data-en="⚡ Stress Resistance" data-nl="⚡ Stressbestendigheid">Résistance au Stress</span>
+                                <span class="soft-skill-chip" data-fr="👥 Travail d'Équipe" data-en="👥 Teamwork" data-nl="👥 Teamwork & Samenwerking">Travail d'Équipe</span>
+                                <span class="soft-skill-chip" data-fr="💡 Curiosité Technique" data-en="💡 Technical Curiosity" data-nl="💡 Technische Nieuwsgierigheid">Curiosité Technique</span>
                             </div>
                         </div>
 
@@ -3709,16 +3873,13 @@
         <!-- ========== CONTACT ========== -->
         <section class="contact-section" id="contact">
             <div class="section-bg-video-container" aria-hidden="true">
-                <video class="section-bg-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/contact.webp">
-                    <source src="assets/video/contact.mp4" type="video/mp4">
-                </video>
-                <img src="assets/video/contact.webp" alt="" class="section-poster-mobile">
+                
                 <div class="section-video-overlay-dark" style="background: rgba(5,1,15,0.35);"></div>
                 <div class="section-video-overlay-grad" style="background: linear-gradient(to right, rgba(5,1,15,0.45), rgba(5,1,15,0.05), transparent);"></div>
                 <div class="section-video-overlay-top" style="background: linear-gradient(to bottom, #05010f, transparent);"></div>
             </div>
             <div class="contact-content">
-                <p class="section-label anim-contact">// 05. <span data-fr="CONTACT" data-en="CONTACT" data-nl="CONTACT">CONTACT</span></p>
+                <p class="section-label anim-contact"><span data-fr="Contact" data-en="Contact" data-nl="Contact">Contact</span></p>
                 <h2 class="contact-title anim-contact" data-fr="Travaillons <span class='text-gradient-warm'>ensemble.</span>" data-en="Let's work <span class='text-gradient-warm'>together.</span>" data-nl="Laten we <span class='text-gradient-warm'>samenwerken.</span>">Travaillons <span class="text-gradient-warm">ensemble.</span></h2>
                 <p class="contact-desc anim-contact" data-fr="Vous avez un projet en tête ? Une question ? N'hésitez pas à me contacter. Je suis toujours ouvert à de nouvelles collaborations et opportunités." data-en="Have a project in mind? A question? Don't hesitate to reach out. I'm always open to new collaborations and opportunities." data-nl="Heeft u een project in gedachten of een vraag? Neem gerust contact op. Ik sta altijd open voor nieuwe samenwerkingen en kansen.">
                     Vous avez un projet en tête ? Une question ? N'hésitez pas à me contacter. Je suis toujours ouvert à de nouvelles collaborations et opportunités.
@@ -3787,9 +3948,9 @@
         let currentLang = 'fr';
 
         const pageTitles = {
-            fr: 'Sam Prophete — Expert IT & Développeur Full-Stack',
-            en: 'Sam Prophete — IT Expert & Full-Stack Developer',
-            nl: 'Sam Prophete — IT-Expert & Full-Stack Ontwikkelaar'
+            fr: 'Sam Prophete — Développeur Full-Stack Junior',
+            en: 'Sam Prophete — Junior Full-Stack Developer',
+            nl: 'Sam Prophete — Junior Full-Stack Ontwikkelaar'
         };
 
         function switchLang(lang) {
@@ -3918,9 +4079,9 @@
         // ============================================
         const typewriterEl = document.getElementById('heroTypewriter');
         const typewriterTexts = {
-            fr: ['DÉVELOPPEUR FULL-STACK', 'ADMIN SYSTÈME', 'EXPERT IT'],
-            en: ['FULL-STACK DEVELOPER', 'SYSTEM ADMIN', 'IT EXPERT'],
-            nl: ['FULL-STACK ONTWIKKELER', 'SYSTEEMBEHEERDER', 'IT-EXPERT']
+            fr: ['Développeur full-stack', 'Admin système junior'],
+            en: ['Full-stack developer', 'Junior system admin'],
+            nl: ['Full-stack ontwikkelaar', 'Junior systeembeheerder']
         };
         let twIndex = 0;
         let twCharIndex = 0;
@@ -4019,7 +4180,7 @@
             gsap.fromTo(el,
                 { y: 60, opacity: 0, scale: 0.96 },
                 {
-                    y: 0, opacity: 1, scale: 1, duration: 0.7, delay: i * 0.1,
+                    y: 0, opacity: 1, scale: 1, duration: 0.7,
                     ease: 'power3.out',
                     scrollTrigger: { trigger: el, start: 'top 90%', once: true }
                 }
@@ -4108,69 +4269,78 @@
 
         // ============================================
                 // ============================================
-        // Skills Sticky Index Scroll-Spy (Victor Castelain continuous scroll)
+        // Skills index: the marker follows the category being read
         // ============================================
-        const skillNavLinks = document.querySelectorAll('.skills-nav-link');
-        const skillCategoryPanels = document.querySelectorAll('.skill-category-panel');
-        const skillsAside = document.querySelector('.skills-sticky-aside');
-        const skillsGridLayout = document.querySelector('.skills-grid-layout');
+        (function () {
+            const links = Array.from(document.querySelectorAll('.skills-nav-link'));
+            const panels = Array.from(document.querySelectorAll('.skill-category-panel'));
+            const aside = document.querySelector('.skills-sticky-aside');
+            const grid = document.querySelector('.skills-grid-layout');
+            const navList = document.querySelector('.skills-nav-list');
+            const marker = document.querySelector('.skills-nav-marker');
+            if (!links.length || !panels.length || !aside || !grid) return;
+            const isMobile = () => window.innerWidth <= 960;
+            let current = -1;
 
-        // Native CSS position: sticky handles pinning smoothly without transform conflicts
-
-        if (skillCategoryPanels.length > 0 && typeof ScrollTrigger !== 'undefined') {
-            skillCategoryPanels.forEach((panel) => {
-                ScrollTrigger.create({
-                    trigger: panel,
-                    start: "top 55%",
-                    end: "bottom 45%",
-                    onEnter: () => activateNav(panel.id),
-                    onEnterBack: () => activateNav(panel.id)
-                });
-            });
-
-            function activateNav(id) {
-                skillNavLinks.forEach(link => {
-                    if (link.getAttribute('href') === '#' + id) {
-                        link.classList.add('active');
-                        const navList = document.querySelector('.skills-nav-list');
-                        if (navList && window.innerWidth <= 960) {
-                            const linkLeft = link.offsetLeft;
-                            const linkWidth = link.offsetWidth;
-                            const navWidth = navList.offsetWidth;
-                            navList.scrollTo({
-                                left: linkLeft - (navWidth / 2) + (linkWidth / 2),
-                                behavior: 'smooth'
-                            });
-                        }
-                    } else {
-                        link.classList.remove('active');
-                    }
-                });
+            // Reading line: slides from the top of the index to its bottom while the
+            // section scrolls, so the first and the last category are always reachable.
+            function readingLine(gridTop) {
+                if (isMobile()) return aside.getBoundingClientRect().bottom + 40;
+                const stickTop = parseFloat(getComputedStyle(aside).top) || 110;
+                const range = Math.max(1, grid.offsetHeight - aside.offsetHeight);
+                const p = Math.min(1, Math.max(0, (stickTop - gridTop) / range));
+                return stickTop + p * aside.offsetHeight;
             }
-        }
-
-        // Smooth scroll with precise offset when clicking on sticky category links
-        skillNavLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetPanel = document.querySelector(targetId);
-                if (targetPanel) {
-                    if (window.innerWidth <= 960) {
-                        const navBar = document.getElementById('navbar');
-                        const navH = navBar ? navBar.offsetHeight : 64;
-                        const targetY = targetPanel.getBoundingClientRect().top + window.pageYOffset - (navH + 16);
-                        window.scrollTo({ top: targetY, behavior: 'smooth' });
-                    } else {
-                        const stickyAside = document.querySelector('.skills-sticky-aside');
-                        const asideRect = stickyAside ? stickyAside.getBoundingClientRect() : null;
-                        const navOffset = asideRect ? asideRect.top : Math.max(95, Math.floor(window.innerHeight / 2 - 185));
-                        const targetY = targetPanel.getBoundingClientRect().top + window.pageYOffset - navOffset;
-                        window.scrollTo({ top: targetY, behavior: 'smooth' });
-                    }
+            function indexAt(gridTop) {
+                const line = readingLine(gridTop);
+                let idx = 0;
+                panels.forEach((panel, i) => { if (gridTop + panel.offsetTop <= line + 1) idx = i; });
+                return idx;
+            }
+            function setActive(idx) {
+                if (idx === current) return;
+                current = idx;
+                links.forEach((l, i) => l.classList.toggle('active', i === idx));
+                const link = links[idx];
+                if (isMobile()) {
+                    navList.scrollTo({ left: link.offsetLeft - navList.offsetWidth / 2 + link.offsetWidth / 2, behavior: 'smooth' });
+                } else if (marker) {
+                    const to = { y: link.offsetTop, height: link.offsetHeight, opacity: 1 };
+                    if (typeof gsap !== 'undefined') gsap.to(marker, Object.assign(to, { duration: 0.45, ease: 'power3.out', overwrite: true }));
+                    else { marker.style.transform = 'translateY(' + to.y + 'px)'; marker.style.height = to.height + 'px'; marker.style.opacity = 1; }
                 }
+            }
+            let ticking = false;
+            function onScroll() {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(() => { ticking = false; setActive(indexAt(grid.getBoundingClientRect().top)); });
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', () => { current = -1; onScroll(); });
+            window.addEventListener('load', () => { current = -1; onScroll(); });
+            onScroll();
+
+            links.forEach((link, i) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const gridAbs = grid.getBoundingClientRect().top + window.pageYOffset;
+                    let y;
+                    if (isMobile()) {
+                        y = gridAbs + panels[i].offsetTop - (aside.getBoundingClientRect().bottom + 16);
+                    } else {
+                        // first scroll position (going down) where this category becomes the active one
+                        const stickTop = parseFloat(getComputedStyle(aside).top) || 110;
+                        const start = gridAbs - stickTop, end = start + grid.offsetHeight - aside.offsetHeight;
+                        y = end;
+                        for (let t = start; t <= end; t += 4) {
+                            if (indexAt(gridAbs - t) === i) { y = t + (i === 0 ? 0 : 12); break; }
+                        }
+                    }
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                });
             });
-        });
+        })();
 
         // Video Controls & Hero Mouse Parallax
         // ============================================
@@ -4225,5 +4395,22 @@
             document.querySelectorAll('video').forEach(v => v.pause());
         }
     </script>
+<script>
+// Project windows straighten in 3D as they scroll into view
+(function () {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.innerWidth <= 960) return;
+    document.querySelectorAll('.project-row').forEach(row => {
+        const win = row.querySelector('.project-mockup-window');
+        if (!win) return;
+        const dir = row.classList.contains('reverse') ? -1 : 1;
+        gsap.fromTo(win, { rotateY: 16 * dir, rotateX: 5, z: -60 }, {
+            rotateY: 0, rotateX: 0, z: 0, ease: 'none',
+            scrollTrigger: { trigger: row, start: 'top 92%', end: 'top 38%', scrub: 0.6 }
+        });
+    });
+})();
+
+</script>
 </body>
 </html>
