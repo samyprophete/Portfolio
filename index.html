@@ -2486,7 +2486,7 @@
                         <source src="assets/video/hero-bg.mp4" type="video/mp4">
                     </video>
                 </div>
-                <img src="assets/video/hero-poster.webp" alt="" class="hero-poster-mobile">
+                <img src="assets/video/hero-poster-mobile.webp" alt="" class="hero-poster-mobile">
                 <div class="video-vignette"></div>
                 <div class="hero-spotlight" id="heroSpotlight"></div>
                 <div class="noise-overlay" style="position:absolute;inset:0;"></div>
@@ -2564,7 +2564,7 @@
                 <video class="section-bg-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/about_me.webp">
                     <source src="assets/video/about_me.mp4" type="video/mp4">
                 </video>
-                <img src="assets/video/about_me.webp" alt="" class="section-poster-mobile">
+                <img src="assets/video/about_me-mobile.webp" alt="" class="section-poster-mobile">
                 <div class="section-video-overlay-dark" style="background: rgba(5,1,15,0.55);"></div>
                 <div class="section-video-overlay-grad" style="background: linear-gradient(to right, rgba(5,1,15,0.75), rgba(5,1,15,0.25), transparent);"></div>
                 <div class="section-video-overlay-top" style="background: linear-gradient(to bottom, #05010f, transparent);"></div>
@@ -2864,7 +2864,7 @@
                 <video class="section-bg-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/project_bg.webp">
                     <source src="assets/video/project_bg.mp4" type="video/mp4">
                 </video>
-                <img src="assets/video/project_bg.webp" alt="" class="section-poster-mobile">
+                <img src="assets/video/project_bg-mobile.webp" alt="" class="section-poster-mobile">
                 <div class="section-video-overlay-dark" style="background: rgba(5,1,15,0.60);"></div>
             </div>
             <div class="projects-content">
@@ -3400,7 +3400,7 @@
                 <video class="section-bg-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/tools_skills.webp">
                     <source src="assets/video/tools_skills.mp4" type="video/mp4">
                 </video>
-                <img src="assets/video/tools_skills.webp" alt="" class="section-poster-mobile">
+                <img src="assets/video/tools_skills-mobile.webp" alt="" class="section-poster-mobile">
                 <div class="section-video-overlay-dark" style="background: rgba(5,1,15,0.55);"></div>
                 <div class="section-video-overlay-grad" style="background: linear-gradient(to right, transparent, transparent, rgba(5,1,15,0.40));"></div>
                 <div class="section-video-overlay-top" style="background: linear-gradient(to bottom, #05010f, transparent);"></div>
@@ -3880,7 +3880,10 @@
         <!-- ========== CONTACT ========== -->
         <section class="contact-section" id="contact">
             <div class="section-bg-video-container" aria-hidden="true">
-                
+                <video class="section-bg-video" autoplay muted loop playsinline preload="metadata" poster="assets/video/contact.webp">
+                    <source src="assets/video/contact.mp4" type="video/mp4">
+                </video>
+                <img src="assets/video/contact-mobile.webp" alt="" class="section-poster-mobile">
                 <div class="section-video-overlay-dark" style="background: rgba(5,1,15,0.35);"></div>
                 <div class="section-video-overlay-grad" style="background: linear-gradient(to right, rgba(5,1,15,0.45), rgba(5,1,15,0.05), transparent);"></div>
                 <div class="section-video-overlay-top" style="background: linear-gradient(to bottom, #05010f, transparent);"></div>
@@ -4416,7 +4419,20 @@
             if (!videos.length) return;
 
             document.documentElement.classList.add('mobile-video');
-            videos.forEach(v => { v.preload = 'none'; });
+            videos.forEach((v) => {
+                v.preload = 'none';
+                const src = v.querySelector('source');
+                if (src) {
+                    const u = src.getAttribute('src');
+                    if (u && u.endsWith('.mp4') && !u.endsWith('-mobile.mp4')) {
+                        src.setAttribute('src', u.replace(/\.mp4$/, '-mobile.mp4'));
+                    }
+                }
+                const po = v.getAttribute('poster');
+                if (po && po.endsWith('.webp') && !po.endsWith('-mobile.webp')) {
+                    v.setAttribute('poster', po.replace(/\.webp$/, '-mobile.webp'));
+                }
+            });
 
             const start = (v) => {
                 if (v.dataset.mobileLoaded !== '1') {
