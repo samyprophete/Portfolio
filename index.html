@@ -540,6 +540,13 @@
         @media (max-width: 768px) {
             .section-poster-mobile { display: block; }
         }
+        /* Videos de fond sur telephone : activees par le script si la connexion suit */
+        @media (max-width: 768px) {
+            html.mobile-video .hero-video-wrapper { display: block; }
+            html.mobile-video .hero-poster-mobile { display: none; }
+            html.mobile-video .section-bg-video { display: block; }
+            html.mobile-video .section-poster-mobile { display: none; }
+        }
         .section-video-overlay-dark {
             position: absolute;
             inset: 0;
@@ -4394,6 +4401,47 @@
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             document.querySelectorAll('video').forEach(v => v.pause());
         }
+
+        // Videos de fond sur telephone : activees seulement si la connexion suit,
+        // et chaque video n'est telechargee qu'en arrivant a l'ecran.
+        (function enableMobileVideo() {
+            if (!window.matchMedia('(max-width: 768px)').matches) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const net = navigator.connection || navigator.webkitConnection || {};
+            if (net.saveData === true) return;
+            if (/2g/.test(net.effectiveType || '')) return;
+
+            const videos = document.querySelectorAll('.hero-video, .section-bg-video');
+            if (!videos.length) return;
+
+            document.documentElement.classList.add('mobile-video');
+            videos.forEach(v => { v.preload = 'none'; });
+
+            const start = (v) => {
+                if (v.dataset.mobileLoaded !== '1') {
+                    v.dataset.mobileLoaded = '1';
+                    v.preload = 'auto';
+                    v.load();
+                }
+                const p = v.play();
+                if (p && p.catch) p.catch(() => {});
+            };
+
+            if (!('IntersectionObserver' in window)) {
+                videos.forEach(start);
+                return;
+            }
+
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((e) => {
+                    if (e.isIntersecting) start(e.target);
+                    else e.target.pause();
+                });
+            }, { rootMargin: '150px 0px' });
+
+            videos.forEach(v => io.observe(v));
+        })();
     </script>
 <script>
 // Project windows straighten in 3D as they scroll into view
