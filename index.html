@@ -4421,6 +4421,11 @@
             document.documentElement.classList.add('mobile-video');
             videos.forEach((v) => {
                 v.preload = 'none';
+                // iOS n'accepte la lecture automatique que si ces trois points sont vrais
+                v.muted = true;
+                v.playsInline = true;
+                v.setAttribute('playsinline', '');
+                v.setAttribute('webkit-playsinline', '');
                 const src = v.querySelector('source');
                 if (src) {
                     const u = src.getAttribute('src');
@@ -4434,14 +4439,22 @@
                 }
             });
 
+            const tryPlay = (v) => {
+                const p = v.play();
+                if (p && p.catch) p.catch(() => {});
+            };
+
             const start = (v) => {
                 if (v.dataset.mobileLoaded !== '1') {
                     v.dataset.mobileLoaded = '1';
                     v.preload = 'auto';
+                    // on attend que la video soit prete avant de relancer la lecture,
+                    // sinon iOS refuse et affiche son bouton play
+                    v.addEventListener('loadeddata', () => tryPlay(v), { once: true });
+                    v.addEventListener('canplay', () => tryPlay(v));
                     v.load();
                 }
-                const p = v.play();
-                if (p && p.catch) p.catch(() => {});
+                tryPlay(v);
             };
 
             if (!('IntersectionObserver' in window)) {
@@ -4451,8 +4464,9 @@
 
             const io = new IntersectionObserver((entries) => {
                 entries.forEach((e) => {
+                    // on ne met plus en pause en sortie d'ecran : une video en pause
+                    // declenche le bouton play d'iOS
                     if (e.isIntersecting) start(e.target);
-                    else e.target.pause();
                 });
             }, { rootMargin: '150px 0px' });
 
