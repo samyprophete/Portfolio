@@ -4439,9 +4439,26 @@
                 }
             });
 
+            // Si iOS refuse de lire (mode economie d'energie par exemple), on cache la
+            // video et on affiche l'image fixe : aucun bouton play ne peut apparaitre.
+            const fallbackToPoster = (v) => {
+                const holder = v.closest('.hero-bg, .section-bg-video-container');
+                if (!holder) return;
+                const wrap = v.closest('.hero-video-wrapper');
+                (wrap || v).style.display = 'none';
+                const img = holder.querySelector('.hero-poster-mobile, .section-poster-mobile');
+                if (img) img.style.display = 'block';
+            };
+
             const tryPlay = (v) => {
                 const p = v.play();
-                if (p && p.catch) p.catch(() => {});
+                if (p && p.catch) {
+                    p.catch(() => {
+                        // un refus peut etre passager : on ne bascule que si la video
+                        // est toujours a l'arret une seconde plus tard
+                        setTimeout(() => { if (v.paused) fallbackToPoster(v); }, 1200);
+                    });
+                }
             };
 
             const start = (v) => {
